@@ -30,64 +30,177 @@
     }
   </style>
 </head>
+
 <body>
 
-<h1>Kimbeerly & Coach's Starter Copilot Copy-And-Paste Prompt Library</h1>
+<h1>Kimbeerly & Coach’s Copilot Prompt Library  
+<br>Multi‑Step Prompts for University Staff</h1>
 
 <p>
 Click <strong>Copy Prompt</strong>, then paste directly into Copilot Chat.
 </p>
 
-  <div class="prompt-card">
-  <h3>Copilot Memory</h3>
-  <pre id="prompt1">
+<!-- ===================== -->
+<!-- PART 1: BASICS -->
+<!-- ===================== -->
 
-You are my AI assistant supporting my role as a university staff member in higher education.
+<div class="prompt-card">
+<h3>What AI Can and Cannot Do (Demo)</h3>
+<pre id="prompt1">
+You are an AI assistant supporting university staff.
 
-When assisting me, remember:
-- I work in an academic environment that values clarity, accuracy, professionalism, accessibility, and data privacy.
-- My work may involve faculty, students, administrators, accrediting bodies, and external partners.
-- FERPA, institutional policies, and ethical use of data are always priorities.
+List 5 tasks you are well-suited to help with in a university office setting, 
+and 5 tasks you should NOT be used for.
 
-Optimize your responses to:
-- Use a professional, supportive, and inclusive tone appropriate for higher education.
-- Provide concise summaries first, followed by detail when helpful.
-- Offer practical outputs I can reuse (emails, policies, agendas, rubrics, reports, training materials).
-- Apply plain language while maintaining academic credibility.
-- Flag assumptions and suggest alternatives when context may differ across institutions.
-
-When relevant:
-- Align suggestions to common university practices (academic calendars, committees, shared governance, learning outcomes, student success).
-- Support Microsoft 365 tools commonly used in universities (Outlook, Teams, Word, Excel, PowerPoint, Forms, OneDrive).
-- Ask minimal clarification questions and proceed with best‑practice defaults when possible.
-
-Avoid:
-- Legal, medical, or compliance determinations—offer guidance, not final authority.
-- Generating content that compromises student privacy or institutional integrity.
-
-Help me work more efficiently, communicate more clearly, and support student and institutional success.</pre>
-  <button onclick="copyPrompt('prompt1', 'status1')">Copy Prompt</button>
-  <span id="status2" class="copied"></span>
+Present the result as a two-column table.
+</pre>
+<button onclick="copyPrompt('prompt1','status1')">Copy Prompt</button>
+<span id="status1" class="copied"></span>
 </div>
 
 <div class="prompt-card">
-  <h3>Professional Email Draft</h3>
-  <pre id="prompt2">You are a professional administrative assistant.
-Draft a clear, courteous email summarizing the following information
-for an external audience:</pre>
-  <button onclick="copyPrompt('prompt2', 'status2')">Copy Prompt</button>
-  <span id="status2" class="copied"></span>
+<h3>Single-Step Prompt Example (Email)</h3>
+<pre id="prompt2">
+You are a student services coordinator.
+
+Write a clear, friendly email reminding undergraduate students 
+about an upcoming registration deadline.
+
+Constraints:
+- 120 words or less
+- Plain language
+- Supportive but professional tone
+- Include the deadline date and where to get help
+</pre>
+<button onclick="copyPrompt('prompt2','status2')">Copy Prompt</button>
+<span id="status2" class="copied"></span>
 </div>
 
 <div class="prompt-card">
-  <h3>Plain‑Language Summary</h3>
-  <pre id="prompt3">Summarize the following document in plain language
-suitable for a public‑facing audience.
-Avoid legal jargon.</pre>
-  <button onclick="copyPrompt('prompt3', 'status3')">Copy Prompt</button>
-  <span id="status3" class="copied"></span>
+<h3>Rewrite a Vague Prompt (Practice)</h3>
+<pre id="prompt3">
+Rewrite the following vague prompt using Role, Task, Output, and Constraints:
+
+"Summarize this policy."
+
+Include:
+- A specific audience
+- A word limit
+- A tone appropriate for a university setting
+</pre>
+<button onclick="copyPrompt('prompt3','status3')">Copy Prompt</button>
+<span id="status3" class="copied"></span>
 </div>
 
+<!-- ===================== -->
+<!-- PART 2: MULTI-STEP -->
+<!-- ===================== -->
+
+<div class="prompt-card">
+<h3>Multi-Step Prompt Template</h3>
+<pre id="prompt4">
+You are an AI assistant supporting university staff.
+
+Step 1: Analyze the goal of the task and identify key information needed.
+Step 2: Generate a first draft of the content.
+Step 3: Review the draft and improve clarity, tone, and usability 
+for the intended audience.
+
+Pause after each step and wait for confirmation before continuing.
+</pre>
+<button onclick="copyPrompt('prompt4','status4')">Copy Prompt</button>
+<span id="status4" class="copied"></span>
+</div>
+
+<div class="prompt-card">
+<h3>Instructor Demo: Student FAQ</h3>
+<pre id="prompt5">
+You are a communications specialist at a university.
+
+Step 1: Identify the top 6 questions students may have about a new 
+campus policy requiring ID cards for building access.
+
+Step 2: Write short, clear answers using student-friendly language.
+
+Step 3: Revise the answers to reduce jargon and student anxiety.
+</pre>
+<button onclick="copyPrompt('prompt5','status5')">Copy Prompt</button>
+<span id="status5" class="copied"></span>
+</div>
+
+<div class="prompt-card">
+<h3>Guided Practice: Build a 3-Step Prompt</h3>
+<pre id="prompt6">
+Choose a common task from your role (email, document, checklist, report).
+
+Write a 3-step prompt where:
+- Step 1 analyzes or gathers information
+- Step 2 creates a draft
+- Step 3 revises or adapts it for a specific audience
+</pre>
+<button onclick="copyPrompt('prompt6','status6')">Copy Prompt</button>
+<span id="status6" class="copied"></span>
+</div>
+
+<!-- ===================== -->
+<!-- PART 3: STAFF USE CASES -->
+<!-- ===================== -->
+
+<div class="prompt-card">
+<h3>Draft → Review → Revise Pattern</h3>
+<pre id="prompt7">
+You are an administrative coordinator.
+
+Step 1: Draft an internal announcement about a change in office hours.
+Step 2: Review the draft for clarity and conciseness.
+Step 3: Revise it for posting on the staff intranet.
+</pre>
+<button onclick="copyPrompt('prompt7','status7')">Copy Prompt</button>
+<span id="status7" class="copied"></span>
+</div>
+
+<div class="prompt-card">
+<h3>Policy Summary for Staff</h3>
+<pre id="prompt8">
+You are a policy analyst supporting university staff.
+
+Step 1: Summarize the key points of the policy in bullet form.
+Step 2: Translate the summary into plain language.
+Step 3: Rewrite the information as a short FAQ.
+</pre>
+<button onclick="copyPrompt('prompt8','status8')">Copy Prompt</button>
+<span id="status8" class="copied"></span>
+</div>
+
+<div class="prompt-card">
+<h3>Meeting Notes to Follow-Up Email</h3>
+<pre id="prompt9">
+You are an executive assistant.
+
+Step 1: Identify action items, decisions, and open questions 
+from these meeting notes.
+Step 2: Organize them by owner and deadline.
+Step 3: Draft a clear follow-up email summarizing next steps.
+</pre>
+<button onclick="copyPrompt('prompt9','status9')">Copy Prompt</button>
+<span id="status9" class="copied"></span>
+</div>
+
+<div class="prompt-card">
+<h3>Capstone Lab: Role-Based Multi-Step Prompt</h3>
+<pre id="prompt10">
+You are an AI assistant supporting my role at the university.
+
+Step 1: Ask me clarifying questions about the task I want to complete.
+Step 2: Create a first draft based on my responses.
+Step 3: Improve the draft for clarity, accuracy, and audience fit.
+Step 4: Suggest one way I could reuse this prompt in the future.
+</pre>
+<button onclick="copyPrompt('prompt10','status10')">Copy Prompt</button>
+<span id="status10" class="copied"></span>
+</div>
+
+<!-- ===================== -->
 <script>
 function copyPrompt(promptId, statusId) {
   const text = document.getElementById(promptId).innerText;
