@@ -1,59 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Copilot Prompt Library</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 900px;
-      margin: 40px auto;
-      line-height: 1.6;
-    }
-    .prompt-card {
-      border: 1px solid #ccc;
-      padding: 16px;
-      margin-bottom: 20px;
-      border-radius: 6px;
-      background: #f9f9f9;
-    }
-    button {
-      margin-top: 10px;
-      padding: 8px 14px;
-      font-size: 14px;
-      cursor: pointer;
-    }
-    .copied {
-      color: green;
-      font-size: 13px;
-      margin-left: 10px;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>Kimberly & Coach – Copilot Prompt Upgrade Library</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  max-width: 1000px;
+  margin: 40px auto;
+  line-height: 1.6;
+}
+.prompt-card {
+  border: 1px solid #ccc;
+  padding: 16px;
+  margin-bottom: 24px;
+  border-radius: 6px;
+  background: #f9f9f9;
+}
+h2 {
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 6px;
+}
+button {
+  margin-top: 10px;
+  padding: 8px 14px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.copied {
+  color: green;
+  font-size: 13px;
+  margin-left: 10px;
+}
+pre {
+  white-space: pre-wrap;
+}
+</style>
 </head>
+
 <body>
 
-<h1>Kimberly & Coach's Copilot Prompt Upgrade Library </h1>
+<h1>Kimberly & Coach’s Copilot Prompt Upgrade Library</h1>
+<p>Click <strong>Copy Prompt</strong>, then paste directly into Microsoft 365 Copilot Chat.</p>
 
-<p>
-Click <strong>Copy Prompt</strong>, then paste directly into Copilot Chat.
-</p>
+<!-- ================= PRELUDE ================= -->
+<h2>Prelude — Copilot Memory Prompt</h2>
 
 <div class="prompt-card">
-  <h3>Professional Email Draft</h3>
-  <pre id="prompt1">You are a professional administrative assistant.
-Draft a clear, courteous email summarizing the following information
-for an external audience:</pre>
-  <button onclick="copyPrompt('prompt1', 'status1')">Copy Prompt</button>
-  <span id="status1" class="copied"></span>
+<h3>Copilot Working Preferences Memory</h3>
+<pre id="p1">Remember the following information about how I work and the kinds of help I want from Copilot:
+• I work in a university administrative/professional environment.
+• Much of my work involves creating executive-ready documents, emails, analysis, and presentations for leadership.
+• I prefer outputs that are structured, concise, and ready to share with stakeholders.
+• When possible, tailor responses for different audiences such as students, faculty, administrators, or executives.
+• I value clear next steps, decision points, and action items.
+• Assume I am comfortable with Microsoft Word, Outlook, Excel, and PowerPoint and want advanced, time-saving help.
+Use this to improve your future responses for me across Microsoft 365 apps.</pre>
+<button onclick="copyPrompt('p1','s1')">Copy Prompt</button>
+<span id="s1" class="copied"></span>
+</div>
+
+<!-- ================= MODULE 1 ================= -->
+<h2>Module 1 — Advanced Word</h2>
+
+<div class="prompt-card">
+<h3>Scenario 1: Policy Draft from Messy Notes</h3>
+<pre id="p2">Act as a university policy analyst with expertise in writing formal institutional policies. Transform this document into a professional Student Travel Fund Policy using this structure:
+1. PURPOSE AND SCOPE
+2. ELIGIBILITY REQUIREMENTS
+3. AWARD LIMITS (table format)
+4. APPLICATION PROCESS
+5. ADVANCE PAYMENT PROVISIONS
+6. POST-TRAVEL REQUIREMENTS
+7. REVIEW AND APPEALS
+For unresolved items, insert [COMMITTEE DECISION NEEDED]. Use formal policy language. The audience is the Provost’s Office.</pre>
+<button onclick="copyPrompt('p2','s2')">Copy Prompt</button>
+<span id="s2" class="copied"></span>
 </div>
 
 <div class="prompt-card">
-  <h3>Plain‑Language Summary</h3>
-  <pre id="prompt2">Summarize the following document in plain language
-suitable for a public‑facing audience.
-Avoid legal jargon.</pre>
-  <button onclick="copyPrompt('prompt2', 'status2')">Copy Prompt</button>
-  <span id="status2" class="copied"></span>
+<h3>Scenario 2A: Student Announcement</h3>
+<pre id="p3">Based on this document, write a student-friendly announcement (max 250 words) highlighting what changes benefit them directly. Use an enthusiastic but professional tone. Include an FAQ with the 3 questions students are most likely to ask. Format for email with a subject line.</pre>
+<button onclick="copyPrompt('p3','s3')">Copy Prompt</button>
+<span id="s3" class="copied"></span>
+</div>
+
+<div class="prompt-card">
+<h3>Scenario 2B: Faculty Communication</h3>
+<pre id="p4">Write a communication for faculty (max 300 words) focusing on syllabus planning, exam scheduling, and grade submission changes. Include a timeline of key dates and address concerns about the compressed exam period.</pre>
+<button onclick="copyPrompt('p4','s4')">Copy Prompt</button>
+<span id="s4" class="copied"></span>
+</div>
+
+<div class="prompt-card">
+<h3>Scenario 2C: Administrative Operations Memo</h3>
+<pre id="p5">Create an operational memo for department administrators (max 400 words). Focus on systems updates, coordination needs, and ownership. Include a responsibility matrix. Use formal memo formatting.</pre>
+<button onclick="copyPrompt('p5','s5')">Copy Prompt</button>
+<span id="s5" class="copied"></span>
+</div>
+
+<!-- ================= MODULE 2 ================= -->
+<h2>Module 2 — Advanced Outlook</h2>
+
+<div class="prompt-card">
+<h3>Scenario 3: Complex Planning Update Email</h3>
+<pre id="p6">Draft a planning update email that:
+1. Opens positively
+2. Categorizes issues as RESOLVED, NEEDS INPUT, RISKS
+3. Presents exactly two options with pros/cons for each decision
+4. Solves poster overflow
+5. Includes a budget decision matrix
+6. Ends with clear asks and a deadline
+Maintain a calm, solutions-oriented tone.</pre>
+<button onclick="copyPrompt('p6','s6')">Copy Prompt</button>
+<span id="s6" class="copied"></span>
+</div>
+
+<div class="prompt-card">
+<h3>Scenario 4: Email Thread Synthesis</h3>
+<pre id="p7">Analyze this email thread and produce:
+DECISIONS MADE
+OPEN QUESTIONS
+CONFLICTING POSITIONS
+RECOMMENDED NEXT STEPS
+ACTION ITEMS ASSIGNED
+ITEMS THAT FELL THROUGH THE CRACKS
+Use bullet points. Flag urgency.</pre>
+<button onclick="copyPrompt('p7','s7')">Copy Prompt</button>
+<span id="s7" class="copied"></span>
+</div>
+
+<!-- ================= MODULE 3 ================= -->
+<h2>Module 3 — Advanced Excel</h2>
+
+<div class="prompt-card">
+<h3>Scenario 5: Budget Variance Executive Memo</h3>
+<pre id="p8">Analyze this budget variance data and produce an executive memo covering:
+• Overall financial position
+• Top 3 concerns (with causes and actions)
+• Bright spots
+• Year-end projection (with reasoning)
+• Reallocation recommendation
+Use concise analysis. One page max.</pre>
+<button onclick="copyPrompt('p8','s8')">Copy Prompt</button>
+<span id="s8" class="copied"></span>
+</div>
+
+<div class="prompt-card">
+<h3>Scenario 6: Staff Satisfaction Insights</h3>
+<pre id="p9">Perform quantitative and qualitative survey analysis including averages, department comparisons, tenure analysis, themes, risk flags, cross-tabs, and prioritized recommendations. Format as a structured insights report.</pre>
+<button onclick="copyPrompt('p9','s9')">Copy Prompt</button>
+<span id="s9" class="copied"></span>
+</div>
+
+<!-- ================= MODULE 4 ================= -->
+<h2>Module 4 — Advanced PowerPoint</h2>
+
+<div class="prompt-card">
+<h3>Scenario 7: Strategic Enrollment Story</h3>
+<pre id="p10">Create a 10-slide Board presentation telling a strategic enrollment story. Include executive summary, trends, composition shifts, student success metrics, risks, and discussion questions. Include speaker notes.</pre>
+<button onclick="copyPrompt('p10','s10')">Copy Prompt</button>
+<span id="s10" class="copied"></span>
+</div>
+
+<div class="prompt-card">
+<h3>Scenario 8: IT Security Executive Deck</h3>
+<pre id="p11">Transform this IT Security Annual Report into a 12-slide executive presentation focused on risk, value, compliance, and priorities. Use business language and speaker notes.</pre>
+<button onclick="copyPrompt('p11','s11')">Copy Prompt</button>
+<span id="s11" class="copied"></span>
+</div>
+
+<!-- ================= MODULE 5 ================= -->
+<h2>Module 5 — Cross‑App Workflow</h2>
+
+<div class="prompt-card">
+<h3>Scenario 9: End‑to‑End Grant Portfolio Workflow</h3>
+<pre id="p12">Analyze the grant portfolio, draft an executive Word memo, build a 6-slide briefing deck, and write a meeting request email. Prioritize risk, decisions, and next steps for leadership.</pre>
+<button onclick="copyPrompt('p12','s12')">Copy Prompt</button>
+<span id="s12" class="copied"></span>
 </div>
 
 <script>
