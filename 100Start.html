@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Copilot Prompt Library</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  max-width: 950px;
+  margin: 40px auto;
+  line-height: 1.6;
+}
+h1, h2 {
+  margin-top: 40px;
+}
+.prompt-card {
+  border: 1px solid #ccc;
+  padding: 16px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  background: #f9f9f9;
+}
+button {
+  margin-top: 10px;
+  padding: 8px 14px;
+  cursor: pointer;
+}
+.copied {
+  margin-left: 10px;
+  color: green;
+  font-size: 13px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Kimbeerly & Coach’s Starter Copilot Copy‑And‑Paste Prompt Library</h1>
+<p><strong>Click “Copy Prompt”</strong> and paste directly into Copilot Chat.</p>
+
+<!-- ========= PROMPT GENERATOR ========= -->
+<script>
+let promptCounter = 1;
+function makePrompt(title, text){
+  const id = "prompt" + promptCounter;
+  const sid = "status" + promptCounter;
+  document.write(`
+    <div class="prompt-card">
+      <h3>${title}</h3>
+      <pre id="${id}">${text}</pre>
+      <button onclick="copyPrompt('${id}','${sid}')">Copy Prompt</button>
+      <span id="${sid}" class="copied"></span>
+    </div>
+  `);
+  promptCounter++;
+}
+function copyPrompt(pid, sid){
+  navigator.clipboard.writeText(document.getElementById(pid).innerText);
+  document.getElementById(sid).innerText = "Copied!";
+  setTimeout(()=>document.getElementById(sid).innerText="",2000);
+}
+</script>
+
+<!-- ========= COPILOT MEMORY ========= -->
+<h2>Startup / Memory Prompt</h2>
+<script>
+makePrompt(
+"Copilot Session Context",
+`You are my AI assistant supporting my role as a university staff member.
+Use a professional, inclusive tone.
+Prioritize clarity, FERPA awareness, and reusable outputs.
+Provide concise summaries before details.
+Support Microsoft 365 tools such as Outlook, Teams, Word, Excel, and PowerPoint.`
+);
+</script>
+
+<!-- ========= DOCUMENTS ========= -->
+<h2>Word & Document Tasks</h2>
+<script>
+makePrompt("Internal Memo",
+"Draft a 1‑page memo announcing a change to office hours. Then rewrite it in a warmer tone and provide a 3‑sentence summary.");
+
+makePrompt("Procedure Creation",
+"Create a step‑by‑step procedure for processing student refund requests. Add common mistakes and a checklist.");
+
+makePrompt("Plain‑Language Rewrite",
+"Rewrite this policy paragraph in plain language and add a short email‑ready summary.");
+
+makePrompt("Welcome Letter",
+"Draft a welcome letter for new staff. Then create a version for remote employees and add FAQs.");
+
+makePrompt("Meeting Notes Cleanup",
+"Turn these meeting notes into a clean document with headings and action items.");
+
+makePrompt("Accessibility Rewrite",
+"Rewrite this document to be accessible and readable for a wide audience.");
+
+makePrompt("Executive Summary",
+"Summarize this long document into an executive summary and bullet highlights.");
+
+makePrompt("Inclusive Language Audit",
+"Rewrite this content to sound more inclusive and explain the changes.");
+
+makePrompt("Professional Denial Letter",
+"Write a professional denial letter, then rewrite it with more empathy.");
+
+makePrompt("Narrative to Table",
+"Convert this information into a table with responsibilities and deadlines.");
+</script>
+
+<!-- ========= EMAIL ========= -->
+<h2>Email & Communication</h2>
+<script>
+makePrompt("Training Reminder",
+"Draft an email reminding staff about required training and include a shorter follow‑up.");
+
+makePrompt("Concise Rewrite",
+"Rewrite this email to be shorter, clearer, and more professional.");
+
+makePrompt("Email Thread Summary",
+"Summarize this email thread and list decisions and pending items.");
+
+makePrompt("Student Email Template",
+"Create a reusable email template for common student questions.");
+
+makePrompt("Missed Deadline Email",
+"Draft a polite but firm email addressing a missed deadline.");
+
+makePrompt("Announcement Email",
+"Turn bullet points into a clear announcement email with a call to action.");
+
+makePrompt("Tone Review",
+"Review this email for tone and clarity and suggest improvements.");
+
+makePrompt("Subject Lines",
+"Write three subject lines: urgent, neutral, and friendly.");
+
+makePrompt("Leadership Forward",
+"Summarize this email chain for senior leadership.");
+
+makePrompt("Meeting Follow‑up",
+"Write a meeting recap email with decisions and next steps.");
+</script>
+
+<!-- ========= MEETINGS ========= -->
+<h2>Meetings & Teams</h2>
+<script>
+makePrompt("Meeting Agenda",
+"Create a meeting agenda with time estimates and roles.");
+
+makePrompt("Action Item Summary",
+"Summarize meeting notes into action items with owners.");
+
+makePrompt("Teams Update",
+"Draft a Teams message summarizing a meeting decision.");
+
+makePrompt("Decision Record",
+"Convert this chat discussion into a formal decision record.");
+
+makePrompt("Recurring Meeting Template",
+"Create a reusable template for recurring meetings.");
+
+makePrompt("Meeting Questions",
+"Extract key questions from these meeting notes.");
+
+makePrompt("Follow‑Up Email",
+"Draft a meeting follow‑up email with next steps.");
+
+makePrompt("Thread Summary",
+"Summarize this Teams thread for leadership.");
+
+makePrompt("Checklist",
+"Create a checklist based on this meeting.");
+
+makePrompt("Non‑Attendee Summary",
+"Rewrite these notes for someone who missed the meeting.");
+</script>
+
+<!-- ========= EXCEL ========= -->
+<h2>Excel & Data Explanation</h2>
+<script>
+makePrompt("Spreadsheet Overview",
+"Explain what this spreadsheet tracks and what the trends show.");
+
+makePrompt("Written Summary",
+"Create a written explanation of this data for email.");
+
+makePrompt("Data Issues",
+"Identify anomalies or missing data and possible causes.");
+
+makePrompt("Leadership Insights",
+"Summarize this spreadsheet into three leadership insights.");
+
+makePrompt("Column Labels",
+"Rewrite column headers to be clearer.");
+
+makePrompt("Update Instructions",
+"Write instructions for correctly updating this spreadsheet.");
+
+makePrompt("Monthly Changes",
+"Explain why numbers changed this month.");
+
+makePrompt("Error Check",
+"Check this spreadsheet for potential errors.");
+
+makePrompt("Plain Language Data",
+"Explain this data in non‑technical language.");
+
+makePrompt("Metric FAQ",
+"Create an FAQ explaining each metric.");
+</script>
+
+<!-- ========= POWERPOINT ========= -->
+<h2>PowerPoint</h2>
+<script>
+makePrompt("Presentation Outline",
+"Create a 10‑slide presentation outline explaining a new process.");
+
+makePrompt("Slide Simplification",
+"Rewrite this slide to be more concise.");
+
+makePrompt("Speaker Notes",
+"Turn these notes into slide titles and speaker notes.");
+
+makePrompt("Onboarding Deck",
+"Outline a presentation for onboarding new staff.");
+
+makePrompt("Audience Simplification",
+"Simplify this deck for a non‑technical audience.");
+
+makePrompt("Benefits Rewrite",
+"Rewrite this slide focusing on benefits.");
+
+makePrompt("Closing Slide",
+"Create a closing slide summarizing takeaways.");
+
+makePrompt("Slide Reduction",
+"Turn this long paragraph into a single slide.");
+
+makePrompt("Deck Review",
+"Review this deck and suggest improvements.");
+
+makePrompt("Agenda Slides",
+"Create agenda and closing slides.");
+</script>
+
+<!-- ========= STUDENT SUPPORT ========= -->
+<h2>Student‑Facing Support</h2>
+<script>
+makePrompt("Empathetic Response",
+"Draft a calm, empathetic response to a frustrated student.");
+
+makePrompt("Student FAQ",
+"Create an FAQ for registration questions.");
+
+makePrompt("Policy for Students",
+"Rewrite this policy explanation for students.");
+
+makePrompt("Front Desk Script",
+"Create a script for front‑desk staff.");
+
+makePrompt("International Students",
+"Rewrite this message for international students.");
+
+makePrompt("Student Guide",
+"Create a numbered student guide.");
+
+makePrompt("Checklist",
+"Convert this into a student checklist.");
+
+makePrompt("Delay Explanation",
+"Write an email explaining a delay plainly.");
+
+makePrompt("Portal Announcement",
+"Write a short student portal announcement.");
+
+makePrompt("Complaint Reduction",
+"Rewrite this message to reduce confusion.");
+</script>
+
+<!-- ========= PLANNING & PRODUCTIVITY ========= -->
+<h2>Planning, Analysis & Productivity</h2>
+<script>
+makePrompt("Risk Summary",
+"Summarize risks and suggest mitigation steps.");
+
+makePrompt("Pros & Cons",
+"Create a pros and cons list.");
+
+makePrompt("Gap Analysis",
+"Identify gaps in this plan.");
+
+makePrompt("Leadership Rewrite",
+"Rewrite this proposal for leadership.");
+
+makePrompt("Deadlines",
+"Extract all deadlines chronologically.");
+
+makePrompt("Workflow Streamlining",
+"Suggest workflow improvements.");
+
+makePrompt("Project Status",
+"Create a one‑page project status summary.");
+
+makePrompt("Dependencies",
+"Identify task dependencies.");
+
+makePrompt("Timeline",
+"Turn this into a project timeline.");
+
+makePrompt("Decision Framework",
+"Create a decision‑making framework.");
+</script>
+
+<!-- ========= META PROMPTS ========= -->
+<h2>Learning How to Use Copilot</h2>
+<script>
+makePrompt("Explain Reasoning",
+"Explain how you interpreted this prompt.");
+
+makePrompt("Assumptions",
+"List assumptions and what to clarify.");
+
+makePrompt("Condense",
+"Rewrite your response using fewer words.");
+
+makePrompt("Alternative Approach",
+"Provide another approach.");
+
+makePrompt("Explain Simply",
+"Explain this as if I were new to the role.");
+
+makePrompt("Human Judgment",
+"Identify where human judgment is needed.");
+
+makePrompt("Improve Prompt",
+"Suggest how to improve my prompt.");
+
+makePrompt("Formatting Options",
+"Show two formatting options.");
+
+makePrompt("Copilot Limits",
+"Explain what Copilot can and cannot do here.");
+
+makePrompt("Reusable Template",
+"Create a reusable prompt template.");
+</script>
+
+</body>
+</html>
