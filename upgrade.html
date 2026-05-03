@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Copilot Prompt Library</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 900px;
+      margin: 40px auto;
+      line-height: 1.6;
+    }
+    .prompt-card {
+      border: 1px solid #ccc;
+      padding: 16px;
+      margin-bottom: 20px;
+      border-radius: 6px;
+      background: #f9f9f9;
+    }
+    button {
+      margin-top: 10px;
+      padding: 8px 14px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .copied {
+      color: green;
+      font-size: 13px;
+      margin-left: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Kimberly & Coach's Copilot Prompt Upgrade Library /h1>
+
+<p>
+Click <strong>Copy Prompt</strong>, then paste directly into Copilot Chat.
+</p>
+
+<div class="prompt-card">
+  <h3>Professional Email Draft</h3>
+  <pre id="prompt1">You are a professional administrative assistant.
+Draft a clear, courteous email summarizing the following information
+for an external audience:</pre>
+  <button onclick="copyPrompt('prompt1', 'status1')">Copy Prompt</button>
+  <span id="status1" class="copied"></span>
+</div>
+
+<div class="prompt-card">
+  <h3>Plain‑Language Summary</h3>
+  <pre id="prompt2">Summarize the following document in plain language
+suitable for a public‑facing audience.
+Avoid legal jargon.</pre>
+  <button onclick="copyPrompt('prompt2', 'status2')">Copy Prompt</button>
+  <span id="status2" class="copied"></span>
+</div>
+
+<script>
+function copyPrompt(promptId, statusId) {
+  const text = document.getElementById(promptId).innerText;
+  navigator.clipboard.writeText(text);
+  document.getElementById(statusId).innerText = "Copied!";
+}
+</script>
+
+</body>
+</html>
