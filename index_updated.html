@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Copilot Prompt Library — Multi‑Step Prompts for Faculty</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --card: #f9f9f9;
+      --border: #d0d0d0;
+      --text: #1a1a1a;
+      --muted: #555;
+      --accent: #2563eb;
+      --success: #0a7a26;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 980px;
+      margin: 36px auto;
+      padding: 0 18px;
+      line-height: 1.55;
+      background: var(--bg);
+      color: var(--text);
+    }
+    h1 { margin-bottom: 6px; }
+    .subtitle { color: var(--muted); margin-top: 0; }
+    .section {
+      margin-top: 26px;
+      padding-top: 10px;
+      border-top: 2px solid #eee;
+    }
+    .prompt-card {
+      border: 1px solid var(--border);
+      padding: 16px;
+      margin: 14px 0 18px;
+      border-radius: 8px;
+      background: var(--card);
+    }
+    pre {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      background: #fff;
+      border: 1px solid #e6e6e6;
+      border-radius: 6px;
+      padding: 12px;
+      margin: 10px 0 0;
+      font-size: 14px;
+    }
+    button {
+      margin-top: 10px;
+      padding: 9px 14px;
+      font-size: 14px;
+      cursor: pointer;
+      border: 1px solid var(--accent);
+      background: var(--accent);
+      color: #fff;
+      border-radius: 6px;
+    }
+    button:hover { filter: brightness(0.95); }
+    .copied {
+      color: var(--success);
+      font-size: 13px;
+      margin-left: 10px;
+      font-weight: bold;
+    }
+    .tip {
+      background: #eef2ff;
+      border: 1px solid #dbeafe;
+      padding: 12px 14px;
+      border-radius: 8px;
+      margin: 14px 0 18px;
+    }
+    .small { font-size: 13px; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <h1>Coach Culbertson’s Copilot Copy‑and‑Paste Prompt Library</h1>
+  <p class="subtitle">Intro to AI Prompt Engineering: <strong>Multi‑Step Prompts for Faculty</strong> (3‑hour workshop)</p>
+  <div class="tip">
+    <strong>How to use:</strong> Click <em>Copy Prompt</em>, paste into Copilot, then replace anything in <strong>[BRACKETS]</strong>.
+    <div class="small">Tip: For multi‑step prompts, paste the whole prompt at once so Copilot can follow the sequence.</div>
+  </div>
+
+  <h2 class="section">Getting Started</h2>
+
+  <div class="prompt-card">
+    <h3>Workshop Copilot Setup (Faculty Beginner)</h3>
+    <pre id="prompt_setup">You are my AI assistant supporting my work as a college professor in higher education.
+
+Operating principles:
+- Prioritize clarity, accuracy, academic integrity, accessibility (UDL), and student privacy (FERPA).
+- When unsure, ask 1–2 targeted questions, otherwise proceed using best‑practice defaults.
+- Separate facts from suggestions. Flag assumptions.
+- Use plain language with academic credibility.
+- Avoid fabricating citations or quoting sources you cannot verify.
+
+Output preferences:
+- Start with a 3–5 bullet summary, then details.
+- Provide reusable artifacts (lesson plans, rubrics, prompts, emails, feedback).
+- Use headings, numbered steps, and tables when helpful.</pre>
+    <button onclick="copyPrompt('prompt_setup', 'status1')">Copy Prompt</button>
+    <span id="status1" class="copied"></span>
+  </div>
+
+  <h2 class="section">Part 1 — Prompt Engineering Basics</h2>
+
+  <div class="prompt-card">
+    <h3>Single‑Step Prompt Formula (Role–Task–Output–Constraints)</h3>
+    <pre id="prompt_single_formula">Help me write an effective single‑step prompt using this formula: Role, Task, Output, Constraints.
+
+Context (who/what this is for): [course + students + goal]
+My rough request: [paste rough idea]
+
+Return:
+1) A polished single‑step prompt I can copy/paste
+2) 3 optional constraint add‑ons (tone, length, audience, citation, accessibility)
+3) 1 sentence explaining why it will work better</pre>
+    <button onclick="copyPrompt('prompt_single_formula', 'status2')">Copy Prompt</button>
+    <span id="status2" class="copied"></span>
+  </div>
+
+  <div class="prompt-card">
+    <h3>What AI Can / Can’t Do (Higher Ed quick primer)</h3>
+    <pre id="prompt_ai_can_cant">Act as an instructional designer coaching AI beginners.
+Create a quick primer for faculty: what generative AI can do well, what it does poorly, and how to use it responsibly in teaching.
+
+Output requirements:
+- A two‑column table: ‘Works well’ vs ‘Use caution / doesn’t do’
+- 6 concrete higher‑ed examples (lesson planning, feedback, rubric drafting, research scoping, accessibility rewrite, student support)
+- A short ‘Do/Don’t’ list focused on privacy, bias, hallucinations, and academic integrity
+- Keep it to ~400–600 words</pre>
+    <button onclick="copyPrompt('prompt_ai_can_cant', 'status3')">Copy Prompt</button>
+    <span id="status3" class="copied"></span>
+  </div>
+
+  <div class="prompt-card">
+    <h3>Web Research with Copilot (Find + Synthesize)</h3>
+    <pre id="prompt_web_research">Use web research to help me get up to speed on: [TOPIC].
+
+Step 1 — Search strategy:
+- Propose 6–10 search queries (mix of general + specific + ‘systematic review’ style).
+
+Step 2 — Source gathering:
+- Find 6–10 reputable sources (peer‑reviewed when possible; otherwise respected organizations).
+- For each: provide title, author/org, year, link, and a 2–3 sentence takeaway.
+
+Step 3 — Synthesis for teaching:
+- Summarize the consensus + disagreements (3–6 bullets).
+- Provide 3 classroom‑ready applications (activity ideas or discussion prompts).
+
+Constraints:
+- Include links for every source.
+- If a claim is uncertain, label it as uncertain.</pre>
+    <button onclick="copyPrompt('prompt_web_research', 'status4')">Copy Prompt</button>
+    <span id="status4" class="copied"></span>
+  </div>
+
+  <h2 class="section">Part 2 — Multi‑Step Prompts</h2>
+
+  <div class="prompt-card">
+    <h3>Multi‑Step Prompt Template (3 steps)</h3>
+    <pre id="prompt_multistep_template">I want a multi‑step prompt I can reuse.
+Task goal: [what you need]
+Audience: [students/colleagues]
+Course context: [level, modality, topic]
+
+Create a 3‑step prompt that follows this structure:
+Step 1: Ask me 3–5 clarifying questions OR infer reasonable defaults and state them.
+Step 2: Generate a first draft output.
+Step 3: Critique the draft against a checklist (accuracy, alignment to outcomes, accessibility, workload, integrity) and then produce a revised final.
+
+Return the finished multi‑step prompt I can paste into Copilot.</pre>
+    <button onclick="copyPrompt('prompt_multistep_template', 'status5')">Copy Prompt</button>
+    <span id="status5" class="copied"></span>
+  </div>
+
+  <div class="prompt-card">
+    <h3>Instructor Example: Multi‑Step Lesson Plan Builder</h3>
+    <pre id="prompt_lesson_builder">You are an instructional designer and subject‑matter teaching coach.
+Build a lesson for my class using a multi‑step process.
+
+Step 1 — Clarify
+Ask me up to 5 questions about: course level, topic, time available, modality (in‑person/online), and constraints (materials, policies). If I don’t answer, make sensible assumptions and state them.
+
+Step 2 — Draft
+Create:
+- 3 learning outcomes (Bloom‑aligned)
+- A minute‑by‑minute plan for a [X]-minute class
+- An active learning activity with clear instructions
+- A quick formative check (exit ticket or poll)
+
+Step 3 — Improve
+Critique the lesson for: alignment, cognitive load, inclusivity/UDL, and feasibility. Revise and provide the final lesson plan plus a 1‑slide outline.</pre>
+    <button onclick="copyPrompt('prompt_lesson_builder', 'status6')">Copy Prompt</button>
+    <span id="status6" class="copied"></span>
+  </div>
+
+  <div class="prompt-card">
+    <h3>Instructor Example: Multi‑Step Assignment Builder</h3>
+    <pre id="prompt_assignment_builder">You are a faculty teaching assistant and assessment specialist.
+Create a student assignment using a multi‑step process.
+
+Step 1 — Clarify
+Ask 4–6 questions about: learning goals, topic scope, student level, length, due date, tools allowed (including AI policy), and grading priorities.
+
+Step 2 — Draft
+Produce:
+- Assignment prompt (student‑friendly)
+- Required components + checklist
+- Submission format
+- Support resources and common pitfalls
+- A brief academic integrity/AI‑use statement aligned to my policy: [paste policy or say ‘unknown’]
+
+Step 3 — Stress‑test and revise
+Identify 5 ways students might misunderstand or misuse AI. Revise the assignment to be clearer and more authentic, and add 3 optional extension challenges.</pre>
+    <button onclick="copyPrompt('prompt_assignment_builder', 'status7')">Copy Prompt</button>
+    <span id="status7" class="copied"></span>
+  </div>
+
+  <div class="prompt-card">
+    <h3>Guided Practice: Build Your Own 3‑Step Prompt</h3>
+    <pre id="prompt_guided_practice">Coach me to build a 3‑step prompt for this real task: [TASK].
+
+Step 1 — Goal & constraints
+Ask me for: audience, purpose, format, length, tone, and any must‑include/must‑avoid items.
+
+Step 2 — Draft the prompt
+Write the full multi‑step prompt in copy/paste form with placeholders like [COURSE], [TOPIC], [RUBRIC].
+
+Step 3 — Make it stronger
+Suggest 5 upgrades (constraints, examples, evaluation criteria, safety/privacy notes). Then output the improved final prompt.</pre>
+    <button onclick="copyPrompt('prompt_guided_practice', 'status8')">Copy Prompt</button>
+    <span id="status8" class="copied"></span>
+  </div>
+
+  <h2 class="section">Part 3 — Faculty Use Cases & Practice</h2>
+
+  <div class="prompt-card">
+    <h3>Common Pattern: Draft → Review → Revise (Reusable)</h3>
+    <pre id="prompt_draft_review_revise">Use a draft–review–revise workflow.
+
+Draft: Create a first draft of [THING] for [AUDIENCE] about [TOPIC].
+Review: Evaluate the draft using this checklist: clarity, correctness, alignment to outcomes, inclusivity/UDL, tone, and concision.
+Revise: Produce an improved version and briefly list what changed and why.
+
+Constraints:
+- If you are uncertain about facts, ask questions or label uncertainty.
+- Keep the final to [LENGTH]</pre>
+    <button onclick="copyPrompt('prompt_draft_review_revise', 'status9')">Copy Prompt</button>
+    <span id="status9" class="copied"></span>
+  </div>
+
+  <div class="prompt-card">
+    <h3>Rubric Builder (Analytic rubric + test)</h3>
+    <pre id="prompt_rubric_builder">Act as an assessment designer. Build an analytic rubric for this assignment: [paste assignment].
+
+Step 1 — Criteria discovery
+Propose 5–7 criteria aligned to the learning outcomes. Ask me which to keep/remove.
+
+Step 2 — Build rubric
+Create a 4‑level rubric (Exemplary/Proficient/Developing/Beginning) with clear, observable descriptors.
+
+Step 3 — Validate
+Create 2 short sample student excerpts (one strong, one weak) and demonstrate how the rubric would score them. Then refine the rubric to reduce ambiguity.</pre>
+    <button onclick="copyPrompt('prompt_rubric_builder', 'status10')">Copy Prompt</button>
+    <span id="status10" class="copied"></span>
+  </div>
+
+  <div class="prompt-card">
+    <h3>Feedback Generator (Aligned to rubric, supportive tone)</h3>
+    <pre id="prompt_feedback_generator">You are a supportive professor providing formative feedback.
+
+Inputs:
+- Rubric or criteria: [paste]
+- Student work excerpt: [paste]
+- Assignment goal: [1–2 sentences]
+
+Output:
+1) 3 strengths tied to rubric criteria
+2) 3 specific improvement actions (each with an example rewrite or next step)
+3) 2 reflective questions for the student
+4) A brief closing message that is encouraging and growth‑mindset
+
+Constraints:
+- Do not invent details beyond what’s provided.
+- Avoid revealing or requesting personal student data.</pre>
+    <button onclick="copyPrompt('prompt_feedback_generator', 'status11')">Copy Prompt</button>
+    <span id="status11" class="copied"></span>
+  </div>
+
+  <div class="prompt-card">
+    <h3>Question Bank Builder (Bloom levels + accessibility)</h3>
+    <pre id="prompt_question_bank">Create a question bank for [TOPIC] at the [COURSE LEVEL].
+
+Step 1 — Blueprint
+Ask me for the learning outcomes and exam format (quiz, midterm, discussion, etc.). If unknown, propose a reasonable set of outcomes and state assumptions.
+
+Step 2 — Generate items
+Produce 12 questions total:
+- 4 recall/understand
+- 4 apply/analyze
+- 4 evaluate/create
+Include answer keys or scoring guidance.
+
+Step 3 — Improve
+Check for clarity, bias, and accessibility (plain language, no trick wording). Revise and provide the final set.</pre>
+    <button onclick="copyPrompt('prompt_question_bank', 'status12')">Copy Prompt</button>
+    <span id="status12" class="copied"></span>
+  </div>
+
+  <div class="prompt-card">
+    <h3>Research Scoping (Search → Annotate → Synthesize)</h3>
+    <pre id="prompt_research_scoping">Help me scope the literature on: [RESEARCH QUESTION].
+
+Step 1 — Define scope
+Ask 3–5 questions (time range, disciplines, populations, methodologies, key terms).
+
+Step 2 — Gather
+Provide a list of search strings and databases/venues to use. Then identify 8–12 likely relevant sources (with links) and write a 2–3 sentence annotation for each.
+
+Step 3 — Synthesize
+Group the sources into themes, summarize key findings, note gaps/controversies, and propose 3 next research directions.
+
+Constraints:
+- Clearly distinguish ‘found in sources’ vs ‘inference/suggestion’.
+- Include links for each source.</pre>
+    <button onclick="copyPrompt('prompt_research_scoping', 'status13')">Copy Prompt</button>
+    <span id="status13" class="copied"></span>
+  </div>
+
+  <div class="prompt-card">
+    <h3>Authentic Assessment (Reduce AI‑shortcut risk)</h3>
+    <pre id="prompt_authentic_assessment">Act as a faculty assessment consultant. Redesign my assessment to be more authentic and resilient to AI shortcuts while still being fair and inclusive.
+
+Inputs:
+- Current assessment: [paste]
+- Learning outcomes: [paste]
+- Constraints (time, grading load, class size): [paste]
+
+Step 1 — Diagnose
+Identify where AI could easily generate an answer without learning.
+
+Step 2 — Redesign
+Propose 2 redesigned options (one low‑change, one high‑change) including instructions and submission requirements.
+
+Step 3 — Safeguards
+Add light‑touch integrity supports (process checkpoints, reflections, oral defense prompts, version history) and a student‑friendly AI‑use policy paragraph.</pre>
+    <button onclick="copyPrompt('prompt_authentic_assessment', 'status14')">Copy Prompt</button>
+    <span id="status14" class="copied"></span>
+  </div>
+
+  <h2 class="section">Wrap‑Up & Prompting Tips</h2>
+
+  <div class="prompt-card">
+    <h3>Prompt Debugger (Fix unclear prompts)</h3>
+    <pre id="prompt_debugger">Help me debug a prompt that isn’t working.
+
+My prompt: [paste]
+The output I got (or what went wrong): [paste]
+
+Step 1 — Diagnose
+Identify what’s missing or ambiguous (role, task, output, constraints, examples, evaluation criteria).
+
+Step 2 — Rewrite
+Provide 2 improved versions:
+- Version A: simple single‑step
+- Version B: multi‑step (draft → review → revise)
+
+Step 3 — Coaching
+Give 5 practical tips I can apply next time.</pre>
+    <button onclick="copyPrompt('prompt_debugger', 'status15')">Copy Prompt</button>
+    <span id="status15" class="copied"></span>
+  </div>
+
+  <div class="prompt-card">
+    <h3>Privacy & Safety Check (Before you paste student data)</h3>
+    <pre id="prompt_privacy_check">Before I use AI for this task, assess privacy, ethics, and data‑minimization risks.
+
+Task: [describe]
+Data I plan to include: [describe/paste]
+
+Return:
+- Risk level (low/medium/high) with reasons
+- What to remove or anonymize
+- A safer alternative workflow (e.g., summarize locally first, use placeholders, or aggregate)
+- A copy/paste ‘safe version’ of my prompt with student identifiers removed</pre>
+    <button onclick="copyPrompt('prompt_privacy_check', 'status16')">Copy Prompt</button>
+    <span id="status16" class="copied"></span>
+  </div>
+
+  <script>
+    function copyPrompt(promptId, statusId) {
+      const text = document.getElementById(promptId).innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const el = document.getElementById(statusId);
+        el.innerText = "Copied!";
+        setTimeout(() => { el.innerText = ""; }, 1800);
+      });
+    }
+  </script>
+
+</body>
+</html>
