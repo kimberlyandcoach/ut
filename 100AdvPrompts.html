@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Copilot Prompt Library</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 1000px;
+      margin: 40px auto;
+      line-height: 1.5;
+      padding: 0 14px;
+    }
+    h1 { margin-bottom: 6px; }
+    .sub { color: #444; margin-top: 0; }
+
+    .toolbar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin: 18px 0 22px;
+      padding: 12px;
+      background: #f3f6fb;
+      border: 1px solid #d7e1f2;
+      border-radius: 8px;
+    }
+    .toolbar label { font-size: 13px; color:#333; }
+    .toolbar input, .toolbar select {
+      padding: 8px 10px;
+      font-size: 14px;
+      border: 1px solid #c9c9c9;
+      border-radius: 6px;
+    }
+    .toolbar .count { margin-left: auto; font-size: 13px; color:#333; }
+
+    .prompt-card {
+      border: 1px solid #d0d0d0;
+      padding: 16px;
+      margin-bottom: 16px;
+      border-radius: 8px;
+      background: #fafafa;
+    }
+    .card-header {
+      display:flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .card-header h3 { margin: 0 0 8px; font-size: 18px; }
+    pre {
+      white-space: pre-wrap;
+      background: #fff;
+      border: 1px solid #e6e6e6;
+      padding: 12px;
+      border-radius: 6px;
+      margin: 8px 0 10px;
+      font-size: 14px;
+    }
+    button {
+      margin-top: 2px;
+      padding: 8px 14px;
+      font-size: 14px;
+      cursor: pointer;
+      border-radius: 6px;
+      border: 1px solid #888;
+      background: #ffffff;
+    }
+    button:hover { background:#f1f1f1; }
+
+    .copied {
+      color: #1a7f37;
+      font-size: 13px;
+      margin-left: 10px;
+    }
+
+    .badges { display:flex; gap:6px; flex-wrap: wrap; justify-content: flex-end; }
+    .badge {
+      display:inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      border: 1px solid #cfcfcf;
+      background: #fff;
+      color: #222;
+    }
+    .badge-quick { background:#f2fff2; border-color:#bfe8bf; }
+    .badge-complex { background:#eef6ff; border-color:#b7d6ff; }
+
+    footer { margin-top: 26px; font-size: 12px; color:#444; }
+  </style>
+</head>
+<body>
+  <h1>Kimberly &amp; Coach's Copilot Prompt Upgrade Library</h1>
+  <p class="sub">Click <strong>Copy Prompt</strong>, then paste directly into Copilot. These prompts are designed for university staff and are compatible with <em>Copilot Basic</em> (no plugins/agents required).</p>
+
+  <div class="toolbar">
+    <div>
+      <label for="searchBox"><strong>Search</strong></label><br />
+      <input id="searchBox" type="text" placeholder="Search titles or prompt text…" oninput="filterPrompts()" />
+    </div>
+    <div>
+      <label for="categorySelect"><strong>App</strong></label><br />
+      <select id="categorySelect" onchange="filterPrompts()">
+        <option value="All">All</option>
+        <option value="Copilot Chat">Copilot Chat</option>
+        <option value="Word">Word</option>
+        <option value="Excel">Excel</option>
+        <option value="PowerPoint">PowerPoint</option>
+        <option value="Outlook">Outlook</option>
+      </select>
+    </div>
+    <div>
+      <label for="complexitySelect"><strong>Complexity</strong></label><br />
+      <select id="complexitySelect" onchange="filterPrompts()">
+        <option value="All">All</option>
+        <option value="Complex">Complex</option>
+        <option value="Quick">Quick</option>
+      </select>
+    </div>
+    <div class="count" id="countLabel"></div>
+  </div>
+<div class="prompt-card" data-category="Copilot Chat" data-complexity="Complex">
+  <div class="card-header">
+    <h3>University Policy QA + Risk Scan (with citations)</h3>
+    <div class="badges"><span class="badge">Copilot Chat</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt1">You are my policy analyst. Using ONLY the text I paste below, do all of the following:
+1) Extract the top 10 obligations (who must do what, by when).
+2) Flag any ambiguous terms and propose clearer wording.
+3) Identify potential compliance risks for a university (FERPA, accessibility, procurement, HR).
+4) Create a 1-page staff-facing summary and a separate 5-bullet leadership brief.
+5) End with 5 questions you need answered to finalize edits.
+
+TEXT:
+[PASTE HERE]</pre>
+  <button onclick="copyPrompt('prompt1','status1')">Copy Prompt</button>
+  <span id="status1" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Copilot Chat" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Meeting-to-Action Pack (minutes, owners, deadlines)</h3>
+    <div class="badges"><span class="badge">Copilot Chat</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt2">Turn these notes into an action pack for university staff.
+Steps:
+1) Produce concise minutes (what was decided vs. discussed).
+2) Create an action item table with Owner, Due date, Dependencies, and Status (blank).
+3) Draft a follow-up email to attendees summarizing decisions + next steps.
+4) Identify decisions that require approvals and suggest the right approver roles.
+
+NOTES:
+[PASTE HERE]</pre>
+  <button onclick="copyPrompt('prompt2','status2')">Copy Prompt</button>
+  <span id="status2" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Copilot Chat" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Research Grant Call Triage (eligibility + checklist)</h3>
+    <div class="badges"><span class="badge">Copilot Chat</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt3">I’m a university grants coordinator. Analyze the funding opportunity text below.
+1) Determine eligibility in plain language (institution, PI, disciplines, geography).
+2) Extract deadlines and required documents.
+3) Build a submission checklist with owners (PI, dept admin, budget, compliance).
+4) Draft a 150-word internal announcement.
+5) List red flags (cost share, data management, subawards, export controls).
+
+OPPORTUNITY TEXT:
+[PASTE HERE]</pre>
+  <button onclick="copyPrompt('prompt3','status3')">Copy Prompt</button>
+  <span id="status3" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Copilot Chat" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Student-Facing Message Rewrite (tone + accessibility)</h3>
+    <div class="badges"><span class="badge">Copilot Chat</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt4">Rewrite the message below for students. Requirements:
+- Friendly, inclusive tone
+- 8th-grade readability
+- Clear bullets and headings
+- Add an accessibility note if links/forms are involved
+- Provide 3 subject line options
+- Keep under 220 words
+
+MESSAGE:
+[PASTE HERE]</pre>
+  <button onclick="copyPrompt('prompt4','status4')">Copy Prompt</button>
+  <span id="status4" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Copilot Chat" data-complexity="Complex">
+  <div class="card-header">
+    <h3>FAQ Builder from Dense Content</h3>
+    <div class="badges"><span class="badge">Copilot Chat</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt5">Create an FAQ from the content below.
+1) Draft 12 Q&amp;As grouped into 3 categories.
+2) For each answer, include: short answer (1 sentence) + details (2–4 bullets).
+3) Add a ‘Who to contact’ line with placeholders.
+4) End with 5 questions students/staff will likely ask that aren’t answered.
+
+CONTENT:
+[PASTE HERE]</pre>
+  <button onclick="copyPrompt('prompt5','status5')">Copy Prompt</button>
+  <span id="status5" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Copilot Chat" data-complexity="Complex">
+  <div class="card-header">
+    <h3>SOP Debugger (process gaps + controls)</h3>
+    <div class="badges"><span class="badge">Copilot Chat</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt6">Act as an internal auditor. Review this standard operating procedure and:
+1) Identify missing steps, unclear handoffs, and failure points.
+2) Suggest controls (approvals, logs, separation of duties) appropriate for a university office.
+3) Propose a revised SOP with numbered steps and role-based responsibilities.
+4) Create a one-page training checklist for new staff.
+
+SOP TEXT:
+[PASTE HERE]</pre>
+  <button onclick="copyPrompt('prompt6','status6')">Copy Prompt</button>
+  <span id="status6" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Copilot Chat" data-complexity="Complex">
+  <div class="card-header">
+    <h3>De-escalation Response Kit (complaint handling)</h3>
+    <div class="badges"><span class="badge">Copilot Chat</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt7">Create a response kit for the complaint below.
+1) Draft a calm, non-defensive first reply (email).
+2) Draft a phone call script (opening, empathy, boundaries, next steps).
+3) Provide a decision tree: when to escalate to supervisor/Title IX/HR/legal.
+4) List 5 facts I should gather before responding again.
+
+COMPLAINT:
+[PASTE HERE]</pre>
+  <button onclick="copyPrompt('prompt7','status7')">Copy Prompt</button>
+  <span id="status7" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Copilot Chat" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Two-Audience Rewrite (faculty vs. public)</h3>
+    <div class="badges"><span class="badge">Copilot Chat</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt8">Using the text below, create two versions:
+A) Faculty/staff internal version: more detail, includes policy references.
+B) Public website version: plain language, no jargon, 150–200 words.
+Then provide a change log explaining the biggest differences.
+
+TEXT:
+[PASTE HERE]</pre>
+  <button onclick="copyPrompt('prompt8','status8')">Copy Prompt</button>
+  <span id="status8" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Copilot Chat" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Rubric Generator (assignment + outcomes alignment)</h3>
+    <div class="badges"><span class="badge">Copilot Chat</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt9">Build an assessment rubric from the assignment description below.
+Steps:
+1) Identify 4–6 criteria aligned to learning outcomes.
+2) Create performance levels (Exceeds/Meets/Approaches/Does not meet) with descriptors.
+3) Suggest point weights totaling 100.
+4) Provide 3 examples of feedback comments per level for the toughest criterion.
+
+ASSIGNMENT:
+[PASTE HERE]</pre>
+  <button onclick="copyPrompt('prompt9','status9')">Copy Prompt</button>
+  <span id="status9" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Copilot Chat" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Data Privacy Triage (what to store where)</h3>
+    <div class="badges"><span class="badge">Copilot Chat</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt10">I manage student/staff data. Based ONLY on the descriptions below, classify each data element into: Public / Internal / Confidential / Highly Restricted.
+Then recommend where it can be stored (email, Teams, SharePoint, OneDrive) and what handling rules apply (encryption, access, retention).
+End with 6 questions to confirm our university’s policy assumptions.
+
+DATA ELEMENTS + CONTEXT:
+[PASTE HERE]</pre>
+  <button onclick="copyPrompt('prompt10','status10')">Copy Prompt</button>
+  <span id="status10" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Copilot Chat" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Strategic Plan Chunking (themes → initiatives → metrics)</h3>
+    <div class="badges"><span class="badge">Copilot Chat</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt11">Turn the strategic plan excerpt below into an execution map.
+1) Extract themes and objectives.
+2) Propose 2–3 initiatives per objective.
+3) For each initiative, suggest KPIs, baseline needed, and quarterly milestones.
+4) Create a RACI matrix template (roles: Provost, Dean, Dept Chair, PM, Analyst).
+
+EXCERPT:
+[PASTE HERE]</pre>
+  <button onclick="copyPrompt('prompt11','status11')">Copy Prompt</button>
+  <span id="status11" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Copilot Chat" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Budget Narrative Builder (from bullets)</h3>
+    <div class="badges"><span class="badge">Copilot Chat</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt12">Create a compelling budget narrative for a university project.
+Inputs are bullet points below.
+Steps:
+1) Write a 250–350 word narrative justifying costs and alignment to goals.
+2) Create a short table: Line item → justification → compliance note.
+3) Provide 5 reviewer objections + rebuttals.
+
+BULLETS:
+[PASTE HERE]</pre>
+  <button onclick="copyPrompt('prompt12','status12')">Copy Prompt</button>
+  <span id="status12" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Copilot Chat" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Conflict-of-Schedule Resolver (constraints-based)</h3>
+    <div class="badges"><span class="badge">Copilot Chat</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt13">Help me resolve these scheduling conflicts.
+1) Identify conflicts and constraints.
+2) Propose 3 schedule options that minimize disruption.
+3) For each option, list tradeoffs and who to notify.
+4) Draft a message to stakeholders explaining the recommended option.
+
+EVENTS/CONSTRAINTS:
+[PASTE HERE]</pre>
+  <button onclick="copyPrompt('prompt13','status13')">Copy Prompt</button>
+  <span id="status13" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Copilot Chat" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Accreditation Evidence Mapper</h3>
+    <div class="badges"><span class="badge">Copilot Chat</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt14">I’m preparing for accreditation. Using the standard(s) and evidence list below:
+1) Map each standard to existing evidence.
+2) Identify gaps and propose what evidence to collect.
+3) Draft a request email to departments asking for missing items with deadlines.
+4) Create a tracker table (Standard, Evidence, Owner, Location, Status).
+
+STANDARDS + EVIDENCE:
+[PASTE HERE]</pre>
+  <button onclick="copyPrompt('prompt14','status14')">Copy Prompt</button>
+  <span id="status14" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Copilot Chat" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Webpage Content Critique (UX + accessibility)</h3>
+    <div class="badges"><span class="badge">Copilot Chat</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt15">Review this webpage draft.
+1) Identify confusing sections and rewrite headings for scannability.
+2) Suggest improvements for accessibility (link text, alt text placeholders, reading level).
+3) Create a ‘top tasks’ section (3–5 bullets).
+4) Provide a concise meta description (155 chars) and 5 SEO-friendly H2 ideas.
+
+DRAFT:
+[PASTE HERE]</pre>
+  <button onclick="copyPrompt('prompt15','status15')">Copy Prompt</button>
+  <span id="status15" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Copilot Chat" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Crisis Comms Pack (internal + external)</h3>
+    <div class="badges"><span class="badge">Copilot Chat</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt16">Create a crisis communication pack based on the scenario below.
+1) Draft an internal all-staff message (transparent, action-oriented).
+2) Draft an external holding statement for the website (short).
+3) Provide a Q&amp;A (8 questions) for call-center/front desk staff.
+4) Include a timeline of what we know/unknowns and a list of decision owners.
+
+SCENARIO:
+[PASTE HERE]</pre>
+  <button onclick="copyPrompt('prompt16','status16')">Copy Prompt</button>
+  <span id="status16" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Copilot Chat" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Vendor Comparison (RFP scoring)</h3>
+    <div class="badges"><span class="badge">Copilot Chat</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt17">Compare the vendors described below.
+1) Build a weighted scoring rubric (criteria + weights totaling 100).
+2) Score each vendor using only provided info; mark unknowns clearly.
+3) Create a short recommendation with risks and negotiation points.
+4) Draft 10 clarification questions to send to vendors.
+
+VENDOR INFO:
+[PASTE HERE]</pre>
+  <button onclick="copyPrompt('prompt17','status17')">Copy Prompt</button>
+  <span id="status17" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Copilot Chat" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Policy-to-Training Microlearning</h3>
+    <div class="badges"><span class="badge">Copilot Chat</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt18">Turn this policy into a 10-minute microlearning module.
+1) Learning objectives (3–5).
+2) A 6-slide outline with speaker notes.
+3) 5 knowledge-check questions (with answers).
+4) A one-page job aid checklist.
+
+POLICY TEXT:
+[PASTE HERE]</pre>
+  <button onclick="copyPrompt('prompt18','status18')">Copy Prompt</button>
+  <span id="status18" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Copilot Chat" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Committee Charter Generator</h3>
+    <div class="badges"><span class="badge">Copilot Chat</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt19">Draft a committee charter for a university working group.
+Steps:
+1) Purpose, scope, decision rights, and out-of-scope items.
+2) Membership roles and expectations.
+3) Meeting cadence and quorum rules.
+4) Deliverables and a 90-day plan with milestones.
+
+TOPIC + CONTEXT:
+[PASTE HERE]</pre>
+  <button onclick="copyPrompt('prompt19','status19')">Copy Prompt</button>
+  <span id="status19" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Copilot Chat" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Stakeholder Map + Messaging (change management)</h3>
+    <div class="badges"><span class="badge">Copilot Chat</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt20">Create a stakeholder map for this change initiative.
+1) Identify stakeholder groups and likely concerns.
+2) Assign influence/impact (High/Med/Low) and engagement approach.
+3) Draft tailored messages for 3 groups: faculty, staff, students.
+4) Provide a communication calendar for the first 4 weeks.
+
+INITIATIVE DETAILS:
+[PASTE HERE]</pre>
+  <button onclick="copyPrompt('prompt20','status20')">Copy Prompt</button>
+  <span id="status20" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Copilot Chat" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Survey Design + Analysis Plan</h3>
+    <div class="badges"><span class="badge">Copilot Chat</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt21">Help me design a survey for university staff based on the goal below.
+1) Draft 12–15 questions (mix of Likert, multiple choice, open text).
+2) Add skip logic suggestions.
+3) Create an analysis plan (how to summarize results, cross-tabs to run).
+4) Draft an invitation email (90–120 words) and a reminder email (60–80 words).
+
+GOAL + AUDIENCE:
+[PASTE HERE]</pre>
+  <button onclick="copyPrompt('prompt21','status21')">Copy Prompt</button>
+  <span id="status21" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Copilot Chat" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Complex Problem Framing (issue tree)</h3>
+    <div class="badges"><span class="badge">Copilot Chat</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt22">I need to frame this university operational problem.
+1) Restate the problem and success criteria.
+2) Build an issue tree (root causes) with 3 levels.
+3) Suggest data we should collect for each branch.
+4) Propose 3 experiments/pilots to test solutions and how to measure impact.
+
+PROBLEM STATEMENT:
+[PASTE HERE]</pre>
+  <button onclick="copyPrompt('prompt22','status22')">Copy Prompt</button>
+  <span id="status22" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Copilot Chat" data-complexity="Quick">
+  <div class="card-header">
+    <h3>Quick: Turn bullets into an executive brief</h3>
+    <div class="badges"><span class="badge">Copilot Chat</span><span class="badge badge-quick">Quick</span></div>
+  </div>
+  <pre id="prompt23">Convert the bullets below into a 1-page executive brief with: Purpose, Background, Options, Recommendation, and Next Steps. Keep it under 350 words.
+
+BULLETS:
+[PASTE HERE]</pre>
+  <button onclick="copyPrompt('prompt23','status23')">Copy Prompt</button>
+  <span id="status23" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Copilot Chat" data-complexity="Quick">
+  <div class="card-header">
+    <h3>Quick: Create 5 variations of a subject line</h3>
+    <div class="badges"><span class="badge">Copilot Chat</span><span class="badge badge-quick">Quick</span></div>
+  </div>
+  <pre id="prompt24">Generate 5 subject line options for this message (tone: professional, not salesy).
+
+MESSAGE:
+[PASTE HERE]</pre>
+  <button onclick="copyPrompt('prompt24','status24')">Copy Prompt</button>
+  <span id="status24" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Word" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Word: Rewrite + Style Guide Enforcement</h3>
+    <div class="badges"><span class="badge">Word</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt25">In this document, do the following:
+1) Rewrite for clarity and active voice while keeping meaning.
+2) Enforce consistent terminology: replace any variants with the approved term list below.
+3) Ensure headings are parallel and use Title Case.
+4) Create a ‘Changes made’ section at the end with 8–12 bullets.
+
+APPROVED TERMS:
+- [TERM A] (use exactly)
+- [TERM B]
+- [TERM C]</pre>
+  <button onclick="copyPrompt('prompt25','status25')">Copy Prompt</button>
+  <span id="status25" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Word" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Word: Long Doc → Summary + TOC + Key Takeaways</h3>
+    <div class="badges"><span class="badge">Word</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt26">Create a deliverable pack from this document:
+1) Insert a 150–200 word executive summary at the top.
+2) Add a Table of Contents after the summary.
+3) At the end of each major section, add 2–3 ‘Key Takeaways’ bullets.
+4) Generate a 10-item glossary of acronyms/terms used in the document.</pre>
+  <button onclick="copyPrompt('prompt26','status26')">Copy Prompt</button>
+  <span id="status26" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Word" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Word: Policy Redline Suggestions (no Track Changes needed)</h3>
+    <div class="badges"><span class="badge">Word</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt27">Review this policy draft and propose improvements.
+Steps:
+1) Identify ambiguous or risky wording and propose exact replacement text.
+2) Create a table: Current text snippet → Proposed text → Rationale.
+3) Add a final section called ‘Open Questions’ with what we need to confirm.</pre>
+  <button onclick="copyPrompt('prompt27','status27')">Copy Prompt</button>
+  <span id="status27" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Word" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Word: Convert Narrative to SOP + Flow</h3>
+    <div class="badges"><span class="badge">Word</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt28">Turn this narrative into an SOP:
+1) Create numbered steps with role labels (Requester, Approver, Processor).
+2) Add inputs/outputs for each step.
+3) Create a ‘Common Errors’ section with prevention tips.
+4) Draft a simple text-based process flow diagram using arrows.</pre>
+  <button onclick="copyPrompt('prompt28','status28')">Copy Prompt</button>
+  <span id="status28" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Word" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Word: Accessibility Pass (headings, links, alt text placeholders)</h3>
+    <div class="badges"><span class="badge">Word</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt29">Run an accessibility pass on this document:
+1) Ensure headings are correctly structured (no skipped levels).
+2) Rewrite any unclear link text to be descriptive.
+3) Add alt-text placeholders for each image/diagram (describe what the image should convey).
+4) Produce an Accessibility Checklist at the end with remaining manual checks.</pre>
+  <button onclick="copyPrompt('prompt29','status29')">Copy Prompt</button>
+  <span id="status29" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Word" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Word: Turn Meeting Notes into Formal Minutes + Motions</h3>
+    <div class="badges"><span class="badge">Word</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt30">Using the notes in this document, create formal committee minutes:
+1) Attendance + agenda
+2) Motions/decisions (clearly labeled)
+3) Discussion summaries
+4) Action items table (Owner, Due, Notes)
+5) Append an ‘Attachments’ section listing any referenced documents.</pre>
+  <button onclick="copyPrompt('prompt30','status30')">Copy Prompt</button>
+  <span id="status30" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Word" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Word: Compare Two Sections for Duplicates + Harmonize</h3>
+    <div class="badges"><span class="badge">Word</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt31">Find duplicated or conflicting content across this document.
+1) List the duplicate/conflicting sections with headings/locations.
+2) Recommend which version to keep and why.
+3) Provide a harmonized final version of the text for each conflict.</pre>
+  <button onclick="copyPrompt('prompt31','status31')">Copy Prompt</button>
+  <span id="status31" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Word" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Word: Build a One-Page Brief + Appendix</h3>
+    <div class="badges"><span class="badge">Word</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt32">Create two outputs from this document:
+A) A one-page brief (&lt;=400 words) for leadership with 5 bullets of recommendations.
+B) An appendix that preserves detail, organized by topic headings.
+Ensure both use consistent terms and add a short ‘Next 30 Days’ plan.</pre>
+  <button onclick="copyPrompt('prompt32','status32')">Copy Prompt</button>
+  <span id="status32" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Word" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Word: Turn Content into FAQ + Web-ready Formatting</h3>
+    <div class="badges"><span class="badge">Word</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt33">Convert this document into a web-ready FAQ:
+1) Create 12 questions grouped under 3 headings.
+2) Keep answers concise (1–2 short paragraphs).
+3) Add ‘Related resources’ placeholders under each group.
+4) Provide a final section: ‘Who to contact’ with role placeholders.</pre>
+  <button onclick="copyPrompt('prompt33','status33')">Copy Prompt</button>
+  <span id="status33" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Word" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Word: Grant Proposal Polish (tighten + compliance)</h3>
+    <div class="badges"><span class="badge">Word</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt34">Polish this grant narrative:
+1) Tighten to reduce length by ~15% without losing meaning.
+2) Ensure consistent voice (we/our) and remove filler.
+3) Pull out all numbers/dates and verify they are consistent across the document (list any conflicts).
+4) Produce a 5-bullet ‘innovation’ highlight section.</pre>
+  <button onclick="copyPrompt('prompt34','status34')">Copy Prompt</button>
+  <span id="status34" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Word" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Word: Create a Reusable Template from This Doc</h3>
+    <div class="badges"><span class="badge">Word</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt35">Turn this document into a reusable template for our office.
+1) Identify repeating elements and convert them into clearly labeled placeholders.
+2) Add instructions in brackets for what goes in each placeholder.
+3) Standardize headings and add a Table of Contents.
+4) Add a ‘Version history’ table at the end.</pre>
+  <button onclick="copyPrompt('prompt35','status35')">Copy Prompt</button>
+  <span id="status35" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Word" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Word: Analyze Tone + Make it More Diplomatic</h3>
+    <div class="badges"><span class="badge">Word</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt36">Review this document for tone risks.
+1) Highlight phrases that could be perceived as harsh or unclear.
+2) Rewrite those sentences in a diplomatic, collaborative tone.
+3) Provide a ‘tone before/after’ table with explanations.</pre>
+  <button onclick="copyPrompt('prompt36','status36')">Copy Prompt</button>
+  <span id="status36" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Word" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Word: Turn Policy into Training Handout</h3>
+    <div class="badges"><span class="badge">Word</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt37">Create a training handout from this policy:
+1) 5 learning objectives
+2) ‘Do/Don’t’ table
+3) 10-question knowledge check (with answers)
+4) A one-page checklist staff can print
+Keep language plain and action-oriented.</pre>
+  <button onclick="copyPrompt('prompt37','status37')">Copy Prompt</button>
+  <span id="status37" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Word" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Word: Extract Definitions + Create Glossary</h3>
+    <div class="badges"><span class="badge">Word</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt38">Scan this document and extract defined terms.
+1) Create a glossary table: Term → Definition → Where used (section).
+2) Identify missing definitions for terms used but not defined.
+3) Suggest improved definitions for any that are circular or vague.</pre>
+  <button onclick="copyPrompt('prompt38','status38')">Copy Prompt</button>
+  <span id="status38" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Word" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Word: Cross-Reference &amp; Consistency Audit</h3>
+    <div class="badges"><span class="badge">Word</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt39">Audit this document for consistency and navigation.
+1) Find references like “see above/below”, figure/table mentions, and section references; list any that are unclear or broken.
+2) Ensure numbering is consistent (headings, lists).
+3) Suggest where cross-references (links) would improve usability and list exactly which text should be linked.
+4) Produce a ‘Fix list’ in priority order.</pre>
+  <button onclick="copyPrompt('prompt39','status39')">Copy Prompt</button>
+  <span id="status39" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Word" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Word: Build an Executive Slide Outline (for PowerPoint later)</h3>
+    <div class="badges"><span class="badge">Word</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt40">From this document, create an executive slide outline:
+1) 10-slide structure with titles
+2) 3–5 bullets per slide
+3) Key stats/quotes to include
+4) ‘Speaker notes’ for slides 1–3
+Output as a numbered list I can paste into PowerPoint.</pre>
+  <button onclick="copyPrompt('prompt40','status40')">Copy Prompt</button>
+  <span id="status40" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Word" data-complexity="Quick">
+  <div class="card-header">
+    <h3>Word: Quick — tighten this paragraph</h3>
+    <div class="badges"><span class="badge">Word</span><span class="badge badge-quick">Quick</span></div>
+  </div>
+  <pre id="prompt41">Rewrite the selected paragraph to be 30% shorter, keeping meaning and a professional university tone. Provide 2 alternatives.</pre>
+  <button onclick="copyPrompt('prompt41','status41')">Copy Prompt</button>
+  <span id="status41" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Word" data-complexity="Quick">
+  <div class="card-header">
+    <h3>Word: Quick — create a table from this text</h3>
+    <div class="badges"><span class="badge">Word</span><span class="badge badge-quick">Quick</span></div>
+  </div>
+  <pre id="prompt42">Convert the selected text into a clean table. Choose sensible column headers and ensure each row is one idea.</pre>
+  <button onclick="copyPrompt('prompt42','status42')">Copy Prompt</button>
+  <span id="status42" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Word" data-complexity="Quick">
+  <div class="card-header">
+    <h3>Word: Quick — create 5 headings</h3>
+    <div class="badges"><span class="badge">Word</span><span class="badge badge-quick">Quick</span></div>
+  </div>
+  <pre id="prompt43">Suggest 5 strong headings for the selected section. Keep them parallel and action-oriented.</pre>
+  <button onclick="copyPrompt('prompt43','status43')">Copy Prompt</button>
+  <span id="status43" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Word" data-complexity="Quick">
+  <div class="card-header">
+    <h3>Word: Quick — rewrite for plain language</h3>
+    <div class="badges"><span class="badge">Word</span><span class="badge badge-quick">Quick</span></div>
+  </div>
+  <pre id="prompt44">Rewrite the selected text in plain language for a public-facing webpage, 8th-grade readability.</pre>
+  <button onclick="copyPrompt('prompt44','status44')">Copy Prompt</button>
+  <span id="status44" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Excel" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Excel: Clean &amp; Standardize a Messy Export</h3>
+    <div class="badges"><span class="badge">Excel</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt45">I have a messy spreadsheet open. Do the following steps and tell me exactly what you changed:
+1) Identify columns with inconsistent formats (dates, currency, phone, IDs).
+2) Standardize them (ISO dates, consistent casing, trim spaces).
+3) Detect duplicates based on [KEY COLUMNS] and show how many were removed/flagged.
+4) Create a new table named CleanData and add data validation for [FIELDS].
+5) Provide a summary of issues found and remaining risks.</pre>
+  <button onclick="copyPrompt('prompt45','status45')">Copy Prompt</button>
+  <span id="status45" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Excel" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Excel: Pivot + Insight Narrative for Leadership</h3>
+    <div class="badges"><span class="badge">Excel</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt46">Using this table, create a pivot analysis:
+1) Build a pivot table showing [METRIC] by [DEPARTMENT] and [TERM/YEAR].
+2) Add slicers for [CAMPUS], [PROGRAM], and [STATUS].
+3) Identify 5 key insights and 2 anomalies.
+4) Draft a 200-word leadership narrative explaining what changed and why it matters.</pre>
+  <button onclick="copyPrompt('prompt46','status46')">Copy Prompt</button>
+  <span id="status46" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Excel" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Excel: Forecast + Assumptions Log</h3>
+    <div class="badges"><span class="badge">Excel</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt47">Create a simple forecast from this data.
+Steps:
+1) Identify the time period and frequency.
+2) Propose 2 forecasting approaches (trend vs seasonal) and choose one with rationale.
+3) Build the forecast table for the next [N] periods.
+4) Create an ‘Assumptions &amp; Notes’ section listing inputs and limitations.
+5) Suggest how to visualize the forecast in one chart.</pre>
+  <button onclick="copyPrompt('prompt47','status47')">Copy Prompt</button>
+  <span id="status47" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Excel" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Excel: Reconcile Two Lists (students/courses/vendors)</h3>
+    <div class="badges"><span class="badge">Excel</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt48">I have two tabs: ListA and ListB. Reconcile them.
+1) Identify the matching key(s) and ask me if ambiguous.
+2) Create a results table with: In both, Only in A, Only in B.
+3) For records in both, flag field-level differences (e.g., name, amount, status).
+4) Provide counts and a short explanation of likely causes of mismatches.</pre>
+  <button onclick="copyPrompt('prompt48','status48')">Copy Prompt</button>
+  <span id="status48" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Excel" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Excel: Build a Data Dictionary + Quality Rules</h3>
+    <div class="badges"><span class="badge">Excel</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt49">Create a data dictionary for this dataset:
+1) For each column, infer meaning, data type, allowed values (if categorical), and example.
+2) Propose data quality rules (required, range checks, uniqueness).
+3) Add a ‘Validation’ sheet with rules I can implement.
+4) Summarize top 5 quality risks.</pre>
+  <button onclick="copyPrompt('prompt49','status49')">Copy Prompt</button>
+  <span id="status49" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Excel" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Excel: Scenario Model (best/base/worst)</h3>
+    <div class="badges"><span class="badge">Excel</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt50">Build a scenario model for this budget table.
+1) Identify key drivers (enrollment, tuition rate, aid %, staffing).
+2) Create input cells for each driver and three scenarios: Best/Base/Worst.
+3) Build output metrics: Net revenue, cost per student, margin.
+4) Add a chart comparing scenarios and a short interpretation.</pre>
+  <button onclick="copyPrompt('prompt50','status50')">Copy Prompt</button>
+  <span id="status50" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Excel" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Excel: Create Dashboard Layout (no fancy add-ins)</h3>
+    <div class="badges"><span class="badge">Excel</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt51">Design a one-sheet dashboard using this data:
+1) Recommend 4 KPI cards with formulas.
+2) Create 2 charts (trend + breakdown) and specify which fields to use.
+3) Add slicers/filters (where appropriate).
+4) Provide step-by-step build instructions I can follow.</pre>
+  <button onclick="copyPrompt('prompt51','status51')">Copy Prompt</button>
+  <span id="status51" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Excel" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Excel: Identify Outliers + Explainable Rules</h3>
+    <div class="badges"><span class="badge">Excel</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt52">Find outliers in [METRIC] and explain them.
+1) Choose an outlier method appropriate for this data (IQR or z-score) and justify.
+2) Flag outlier rows in a new column OutlierFlag.
+3) Summarize outliers by [DEPARTMENT/PROGRAM].
+4) Provide hypotheses for why they occurred and what data to verify.</pre>
+  <button onclick="copyPrompt('prompt52','status52')">Copy Prompt</button>
+  <span id="status52" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Excel" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Excel: Create a Rollup from Multiple Sheets</h3>
+    <div class="badges"><span class="badge">Excel</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt53">I have similarly-structured sheets (e.g., Dept1…DeptN).
+1) Confirm the common header structure and any exceptions.
+2) Create a consolidated table on a new sheet named Rollup.
+3) Add a column SourceSheet.
+4) Build a pivot summary of totals by SourceSheet and [CATEGORY].
+5) List any sheets/rows that could not be consolidated cleanly.</pre>
+  <button onclick="copyPrompt('prompt53','status53')">Copy Prompt</button>
+  <span id="status53" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Excel" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Excel: Turn Free-Text Comments into Themes</h3>
+    <div class="badges"><span class="badge">Excel</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt54">Analyze the Comments column.
+1) Clean obvious noise (extra spaces, repeated punctuation).
+2) Cluster comments into 6–10 themes with theme labels.
+3) Provide a table: Theme → Count → Representative quotes (3).
+4) Suggest 5 action recommendations based on the themes.</pre>
+  <button onclick="copyPrompt('prompt54','status54')">Copy Prompt</button>
+  <span id="status54" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Excel" data-complexity="Quick">
+  <div class="card-header">
+    <h3>Excel: Quick — write formulas for me</h3>
+    <div class="badges"><span class="badge">Excel</span><span class="badge badge-quick">Quick</span></div>
+  </div>
+  <pre id="prompt55">I need formulas for this table. Create formulas (not VBA) for:
+- [CALC 1]
+- [CALC 2]
+- [CALC 3]
+Explain where to place them and which columns they reference.</pre>
+  <button onclick="copyPrompt('prompt55','status55')">Copy Prompt</button>
+  <span id="status55" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Excel" data-complexity="Quick">
+  <div class="card-header">
+    <h3>Excel: Quick — conditional formatting rules</h3>
+    <div class="badges"><span class="badge">Excel</span><span class="badge badge-quick">Quick</span></div>
+  </div>
+  <pre id="prompt56">Suggest conditional formatting rules to highlight: duplicates, overdue dates, and values outside [RANGE]. Provide exact rule logic.</pre>
+  <button onclick="copyPrompt('prompt56','status56')">Copy Prompt</button>
+  <span id="status56" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Excel" data-complexity="Quick">
+  <div class="card-header">
+    <h3>Excel: Quick — pivot table fields</h3>
+    <div class="badges"><span class="badge">Excel</span><span class="badge badge-quick">Quick</span></div>
+  </div>
+  <pre id="prompt57">Tell me exactly which fields to put in Rows, Columns, Values, and Filters to answer: [QUESTION].</pre>
+  <button onclick="copyPrompt('prompt57','status57')">Copy Prompt</button>
+  <span id="status57" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Excel" data-complexity="Quick">
+  <div class="card-header">
+    <h3>Excel: Quick — chart recommendation</h3>
+    <div class="badges"><span class="badge">Excel</span><span class="badge badge-quick">Quick</span></div>
+  </div>
+  <pre id="prompt58">Given this dataset and question, recommend the best chart type and why. Then tell me the exact fields for axes/series.</pre>
+  <button onclick="copyPrompt('prompt58','status58')">Copy Prompt</button>
+  <span id="status58" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Excel" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Excel: Gradebook Automation (university course)</h3>
+    <div class="badges"><span class="badge">Excel</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt59">I have a gradebook table.
+1) Identify assessment columns and weights (or ask if missing).
+2) Create a final grade calculation with dropped lowest score for [CATEGORY].
+3) Flag students at risk (&lt;[THRESHOLD]) and create a filtered view.
+4) Create a mail-merge-friendly list: Student, Email, Current grade, Missing work count.</pre>
+  <button onclick="copyPrompt('prompt59','status59')">Copy Prompt</button>
+  <span id="status59" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Excel" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Excel: Procurement Spend Analysis</h3>
+    <div class="badges"><span class="badge">Excel</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt60">Analyze this spend data for procurement insights.
+1) Standardize vendor names (case, punctuation) and flag possible duplicates.
+2) Create top-10 vendors by spend and by transaction count.
+3) Identify potential contract leakage (off-contract categories).
+4) Produce a one-page summary for leadership with 5 recommended actions.</pre>
+  <button onclick="copyPrompt('prompt60','status60')">Copy Prompt</button>
+  <span id="status60" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Excel" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Excel: Attendance/Utilization Trend + Seasonality</h3>
+    <div class="badges"><span class="badge">Excel</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt61">Using this attendance/utilization data:
+1) Create a monthly trend table and chart.
+2) Identify seasonality patterns and peak periods.
+3) Compare [GROUP A] vs [GROUP B] and summarize differences.
+4) Draft 3 operational recommendations based on the findings.</pre>
+  <button onclick="copyPrompt('prompt61','status61')">Copy Prompt</button>
+  <span id="status61" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Excel" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Excel: Audit Trail Columns + Controls</h3>
+    <div class="badges"><span class="badge">Excel</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt62">Add lightweight audit controls to this tracker:
+1) Add columns for LastUpdated, UpdatedBy, StatusDate, Notes.
+2) Recommend data validation lists for Status and Priority.
+3) Provide a set of conditional formatting rules to highlight stale items (&gt;30 days).
+4) Draft a short SOP for maintaining this tracker.</pre>
+  <button onclick="copyPrompt('prompt62','status62')">Copy Prompt</button>
+  <span id="status62" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Excel" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Excel: Scholarship Allocation Model</h3>
+    <div class="badges"><span class="badge">Excel</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt63">Help me model scholarship allocation.
+1) Define eligibility rules from the columns present.
+2) Create a ranking score based on [GPA], [NEED], and [CRITERIA], with adjustable weights.
+3) Allocate awards until the budget cap is reached; flag those just below the cutoff.
+4) Produce summary stats by college/department and a fairness check (distribution by demographic columns if present).</pre>
+  <button onclick="copyPrompt('prompt63','status63')">Copy Prompt</button>
+  <span id="status63" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Excel" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Excel: Timetable Capacity Planner</h3>
+    <div class="badges"><span class="badge">Excel</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt64">Create a capacity planner from this schedule data.
+1) Calculate seat utilization by course, room, and time block.
+2) Flag over-capacity and under-utilized sections.
+3) Recommend 5 schedule adjustments to improve utilization without increasing total sections.
+4) Create a pivot + chart to communicate the findings.</pre>
+  <button onclick="copyPrompt('prompt64','status64')">Copy Prompt</button>
+  <span id="status64" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="PowerPoint" data-complexity="Complex">
+  <div class="card-header">
+    <h3>PowerPoint: Executive Deck from Notes (tight storyline)</h3>
+    <div class="badges"><span class="badge">PowerPoint</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt65">Create a 10-slide executive deck from the content in this file.
+Steps:
+1) Propose a storyline (Problem → Evidence → Options → Recommendation → Next steps).
+2) Create slide titles and 3–5 bullets each (no paragraphs).
+3) Suggest 2 visuals (chart/table) and specify what data goes in each.
+4) Add speaker notes for slides 1, 2, and 10.
+Keep tone: university leadership, concise.</pre>
+  <button onclick="copyPrompt('prompt65','status65')">Copy Prompt</button>
+  <span id="status65" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="PowerPoint" data-complexity="Complex">
+  <div class="card-header">
+    <h3>PowerPoint: Transform a Dense Slide into 3 Clean Slides</h3>
+    <div class="badges"><span class="badge">PowerPoint</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt66">Take the selected dense slide and redesign it as 3 slides:
+1) Identify the core message and supporting points.
+2) Create 3 slide titles that build logically.
+3) Rewrite bullets to be parallel and under 7 words each.
+4) Recommend a layout for each slide (e.g., left text/right visual).
+Return the rewritten content.</pre>
+  <button onclick="copyPrompt('prompt66','status66')">Copy Prompt</button>
+  <span id="status66" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="PowerPoint" data-complexity="Complex">
+  <div class="card-header">
+    <h3>PowerPoint: Data-to-Story (chart narrative)</h3>
+    <div class="badges"><span class="badge">PowerPoint</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt67">Using the chart/table in this deck, do the following:
+1) Write the ‘headline’ takeaway in one sentence.
+2) Add 3 annotation callouts I can place on the chart.
+3) Create a short speaker script (45–60 seconds).
+4) Suggest one alternative visualization that would better show the point.</pre>
+  <button onclick="copyPrompt('prompt67','status67')">Copy Prompt</button>
+  <span id="status67" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="PowerPoint" data-complexity="Complex">
+  <div class="card-header">
+    <h3>PowerPoint: Accessibility Fix Pack</h3>
+    <div class="badges"><span class="badge">PowerPoint</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt68">Improve accessibility across this deck:
+1) Ensure every slide has a unique, descriptive title.
+2) Rewrite any vague link text.
+3) Provide alt-text descriptions for each image/chart (what it shows + why it matters).
+4) Flag slides likely to have reading order issues and tell me how to fix them.</pre>
+  <button onclick="copyPrompt('prompt68','status68')">Copy Prompt</button>
+  <span id="status68" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="PowerPoint" data-complexity="Complex">
+  <div class="card-header">
+    <h3>PowerPoint: Faculty Workshop Deck (interactive)</h3>
+    <div class="badges"><span class="badge">PowerPoint</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt69">Design a 30-minute faculty workshop deck on: [TOPIC].
+Steps:
+1) Create a 12-slide outline with timing per section.
+2) Add 3 interaction moments (poll/discussion/activity) with facilitator instructions.
+3) Provide speaker notes for the first 4 slides.
+4) Create a final slide with ‘resources’ placeholders and a QR-code placeholder.</pre>
+  <button onclick="copyPrompt('prompt69','status69')">Copy Prompt</button>
+  <span id="status69" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="PowerPoint" data-complexity="Complex">
+  <div class="card-header">
+    <h3>PowerPoint: Convert Document Summary into Slides</h3>
+    <div class="badges"><span class="badge">PowerPoint</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt70">I will paste a summary below. Turn it into slides:
+1) Create a 8-slide structure with titles.
+2) Each slide: 3–5 bullets max, ≤12 words each.
+3) Suggest one visual per slide (icon, diagram, chart).
+4) Provide a closing slide with 3 decision asks.
+
+SUMMARY:
+[PASTE HERE]</pre>
+  <button onclick="copyPrompt('prompt70','status70')">Copy Prompt</button>
+  <span id="status70" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="PowerPoint" data-complexity="Complex">
+  <div class="card-header">
+    <h3>PowerPoint: Executive One-Slide (OGSM)</h3>
+    <div class="badges"><span class="badge">PowerPoint</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt71">Create a single-slide OGSM (Objectives, Goals, Strategies, Measures) for this initiative.
+Steps:
+1) Draft each OGSM component in tight phrases.
+2) Ensure measures are measurable and time-bound.
+3) Provide 3 risks + mitigations in a small footer section.
+
+INITIATIVE DETAILS:
+[PASTE HERE]</pre>
+  <button onclick="copyPrompt('prompt71','status71')">Copy Prompt</button>
+  <span id="status71" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="PowerPoint" data-complexity="Complex">
+  <div class="card-header">
+    <h3>PowerPoint: Design Consistency Audit</h3>
+    <div class="badges"><span class="badge">PowerPoint</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt72">Audit this deck for consistency.
+1) Identify inconsistent fonts, sizes, alignment, and color usage.
+2) Recommend a simple style standard (title size, body size, spacing).
+3) Provide a checklist I can follow to fix the deck quickly.
+4) Rewrite any slides with overly wordy bullets.</pre>
+  <button onclick="copyPrompt('prompt72','status72')">Copy Prompt</button>
+  <span id="status72" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="PowerPoint" data-complexity="Complex">
+  <div class="card-header">
+    <h3>PowerPoint: Slide-by-Slide Speaker Notes Builder</h3>
+    <div class="badges"><span class="badge">PowerPoint</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt73">Create speaker notes for each slide in this deck.
+For each slide:
+1) State the key message in 1 sentence.
+2) Provide a 20–40 second script.
+3) Add 1 transition sentence to the next slide.
+Keep the voice natural and confident.</pre>
+  <button onclick="copyPrompt('prompt73','status73')">Copy Prompt</button>
+  <span id="status73" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="PowerPoint" data-complexity="Complex">
+  <div class="card-header">
+    <h3>PowerPoint: Q&amp;A Prep (anticipated questions)</h3>
+    <div class="badges"><span class="badge">PowerPoint</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt74">Based on this deck, generate Q&amp;A prep:
+1) List 12 tough questions an informed faculty senate might ask.
+2) Provide succinct answers (2–4 bullets each).
+3) Flag any slides that need backup data and suggest what to prepare.</pre>
+  <button onclick="copyPrompt('prompt74','status74')">Copy Prompt</button>
+  <span id="status74" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="PowerPoint" data-complexity="Complex">
+  <div class="card-header">
+    <h3>PowerPoint: Storyboard for Campus Town Hall</h3>
+    <div class="badges"><span class="badge">PowerPoint</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt75">Storyboard a 20-minute campus town hall deck on: [TOPIC].
+1) Audience concerns and what to address first.
+2) 8–10 slide storyboard with titles and key points.
+3) Add 3 empathy moments and 3 credibility moments (data/authority).
+4) Draft the opening and closing scripts (30 seconds each).</pre>
+  <button onclick="copyPrompt('prompt75','status75')">Copy Prompt</button>
+  <span id="status75" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="PowerPoint" data-complexity="Complex">
+  <div class="card-header">
+    <h3>PowerPoint: Convert Bullet List into Visual Framework</h3>
+    <div class="badges"><span class="badge">PowerPoint</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt76">Turn the bullets below into a visual framework slide.
+1) Choose the best framework (2x2, pyramid, process, timeline) and justify.
+2) Rewrite bullets to fit the framework labels.
+3) Provide final text for the slide plus a short talk track.
+
+BULLETS:
+[PASTE HERE]</pre>
+  <button onclick="copyPrompt('prompt76','status76')">Copy Prompt</button>
+  <span id="status76" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="PowerPoint" data-complexity="Complex">
+  <div class="card-header">
+    <h3>PowerPoint: Before/After Change Slide</h3>
+    <div class="badges"><span class="badge">PowerPoint</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt77">Create a ‘Before vs After’ slide for this change.
+1) List 5 pain points in the current state.
+2) List 5 improvements in the future state.
+3) Provide a simple two-column slide layout and concise wording.
+4) Add a 3-step transition plan in the footer.</pre>
+  <button onclick="copyPrompt('prompt77','status77')">Copy Prompt</button>
+  <span id="status77" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="PowerPoint" data-complexity="Complex">
+  <div class="card-header">
+    <h3>PowerPoint: Metrics Slide (KPI definitions)</h3>
+    <div class="badges"><span class="badge">PowerPoint</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt78">Create a KPI slide from the metrics below.
+1) For each KPI: definition, formula, target, and data source (if known).
+2) Recommend the best visual (gauge, sparkline, bar) for each.
+3) Provide a short narrative headline tying KPIs to strategy.
+
+METRICS:
+[PASTE HERE]</pre>
+  <button onclick="copyPrompt('prompt78','status78')">Copy Prompt</button>
+  <span id="status78" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="PowerPoint" data-complexity="Quick">
+  <div class="card-header">
+    <h3>PowerPoint: Quick — improve slide title clarity</h3>
+    <div class="badges"><span class="badge">PowerPoint</span><span class="badge badge-quick">Quick</span></div>
+  </div>
+  <pre id="prompt79">Rewrite the selected slide title as a takeaway headline (verb + impact). Give 5 options.</pre>
+  <button onclick="copyPrompt('prompt79','status79')">Copy Prompt</button>
+  <span id="status79" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="PowerPoint" data-complexity="Quick">
+  <div class="card-header">
+    <h3>PowerPoint: Quick — shorten bullets</h3>
+    <div class="badges"><span class="badge">PowerPoint</span><span class="badge badge-quick">Quick</span></div>
+  </div>
+  <pre id="prompt80">Rewrite the selected bullets so each is under 7 words and starts with a verb. Provide 2 versions.</pre>
+  <button onclick="copyPrompt('prompt80','status80')">Copy Prompt</button>
+  <span id="status80" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="PowerPoint" data-complexity="Quick">
+  <div class="card-header">
+    <h3>PowerPoint: Quick — create a closing slide</h3>
+    <div class="badges"><span class="badge">PowerPoint</span><span class="badge badge-quick">Quick</span></div>
+  </div>
+  <pre id="prompt81">Create a closing slide with: Summary (3 bullets), Decisions needed (3 bullets), Next steps (3 bullets). Use a confident, neutral tone.</pre>
+  <button onclick="copyPrompt('prompt81','status81')">Copy Prompt</button>
+  <span id="status81" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="PowerPoint" data-complexity="Quick">
+  <div class="card-header">
+    <h3>PowerPoint: Quick — turn this into a timeline</h3>
+    <div class="badges"><span class="badge">PowerPoint</span><span class="badge badge-quick">Quick</span></div>
+  </div>
+  <pre id="prompt82">Convert the selected text into a 5-milestone timeline with dates (or placeholders) and concise milestone labels.</pre>
+  <button onclick="copyPrompt('prompt82','status82')">Copy Prompt</button>
+  <span id="status82" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="PowerPoint" data-complexity="Complex">
+  <div class="card-header">
+    <h3>PowerPoint: Research Poster to 5-Minute Talk</h3>
+    <div class="badges"><span class="badge">PowerPoint</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt83">I have a research poster slide.
+1) Extract the key message, methods, results, and implications.
+2) Create a 5-minute talk track with timing marks.
+3) Suggest 3 audience questions to invite at the end.
+4) Create a simplified single-slide version for a general audience.</pre>
+  <button onclick="copyPrompt('prompt83','status83')">Copy Prompt</button>
+  <span id="status83" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Outlook" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Outlook: Email Thread → Decision + Next Steps</h3>
+    <div class="badges"><span class="badge">Outlook</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt84">From this email thread, produce:
+1) The current decision status (what’s agreed, what’s pending).
+2) A bullet summary by topic.
+3) A proposed next-step plan with owners and dates.
+4) Draft my reply to move this forward (polite, firm, 120–180 words).</pre>
+  <button onclick="copyPrompt('prompt84','status84')">Copy Prompt</button>
+  <span id="status84" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Outlook" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Outlook: Inbox Triage Rules (manual + quick steps)</h3>
+    <div class="badges"><span class="badge">Outlook</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt85">Help me triage my inbox using this week’s emails.
+1) Identify my top 5 recurring email categories.
+2) Recommend a folder/label structure and Quick Steps for each category.
+3) Draft 3 reusable response templates for the most common requests.
+4) Provide a 10-minute daily triage routine.</pre>
+  <button onclick="copyPrompt('prompt85','status85')">Copy Prompt</button>
+  <span id="status85" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Outlook" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Outlook: Meeting Request Rewrite + Agenda</h3>
+    <div class="badges"><span class="badge">Outlook</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt86">Rewrite this meeting request so it’s crisp and action-oriented.
+1) Provide 3 subject line options.
+2) Draft an agenda with time boxes and desired outputs.
+3) Add pre-work instructions and how attendees should prepare.
+4) Suggest who must attend vs optional.
+
+DRAFT INVITE TEXT:
+[PASTE HERE]</pre>
+  <button onclick="copyPrompt('prompt86','status86')">Copy Prompt</button>
+  <span id="status86" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Outlook" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Outlook: Decline Politely + Offer Alternatives</h3>
+    <div class="badges"><span class="badge">Outlook</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt87">Draft a polite decline to the email below, but keep the relationship strong.
+1) Acknowledge the request.
+2) State constraints without oversharing.
+3) Offer 2 alternative options (delegate, later date, self-serve resource).
+4) Provide a short version (&lt;=60 words) and a standard version (120–160 words).
+
+EMAIL:
+[PASTE HERE]</pre>
+  <button onclick="copyPrompt('prompt87','status87')">Copy Prompt</button>
+  <span id="status87" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Outlook" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Outlook: Event Logistics Email Pack</h3>
+    <div class="badges"><span class="badge">Outlook</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt88">Create an email pack for a university event described below.
+1) Save-the-date email (short).
+2) Formal invitation email with agenda + logistics.
+3) Reminder email (24 hours before) with parking/Zoom details.
+4) Post-event thank you + survey request email.
+
+EVENT DETAILS:
+[PASTE HERE]</pre>
+  <button onclick="copyPrompt('prompt88','status88')">Copy Prompt</button>
+  <span id="status88" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Outlook" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Outlook: Student/Parent Sensitive Reply (FERPA-aware)</h3>
+    <div class="badges"><span class="badge">Outlook</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt89">Draft a reply to this message with a FERPA-aware, supportive tone.
+Steps:
+1) Identify what information can/can’t be shared based on what’s written.
+2) Draft the email with clear next steps and who to contact.
+3) Provide an alternate version if the sender is not the student.
+
+MESSAGE:
+[PASTE HERE]</pre>
+  <button onclick="copyPrompt('prompt89','status89')">Copy Prompt</button>
+  <span id="status89" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Outlook" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Outlook: Follow-up After No Response (3 nudges)</h3>
+    <div class="badges"><span class="badge">Outlook</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt90">Write three follow-up emails for this thread:
+1) Friendly nudge (2–3 sentences).
+2) Firm nudge with deadline (4–6 sentences).
+3) Escalation note to loop in a supervisor (professional, neutral).
+Use placeholders for dates and names.
+
+THREAD CONTEXT:
+[PASTE HERE]</pre>
+  <button onclick="copyPrompt('prompt90','status90')">Copy Prompt</button>
+  <span id="status90" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Outlook" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Outlook: Turn Email into Task List + Calendar Plan</h3>
+    <div class="badges"><span class="badge">Outlook</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt91">From the email below, create:
+1) A prioritized task list with due dates.
+2) A suggested calendar plan for completing the work (blocks).
+3) A short reply confirming receipt and timeline.
+
+EMAIL:
+[PASTE HERE]</pre>
+  <button onclick="copyPrompt('prompt91','status91')">Copy Prompt</button>
+  <span id="status91" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Outlook" data-complexity="Quick">
+  <div class="card-header">
+    <h3>Outlook: Quick — shorten my email</h3>
+    <div class="badges"><span class="badge">Outlook</span><span class="badge badge-quick">Quick</span></div>
+  </div>
+  <pre id="prompt92">Rewrite my draft email to be 30% shorter, keeping all key details and a collegial tone.
+
+DRAFT:
+[PASTE HERE]</pre>
+  <button onclick="copyPrompt('prompt92','status92')">Copy Prompt</button>
+  <span id="status92" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Outlook" data-complexity="Quick">
+  <div class="card-header">
+    <h3>Outlook: Quick — convert to bullet points</h3>
+    <div class="badges"><span class="badge">Outlook</span><span class="badge badge-quick">Quick</span></div>
+  </div>
+  <pre id="prompt93">Convert this email into clear bullet points with headings: What’s changing, What you need to do, Deadlines, Where to get help.
+
+EMAIL:
+[PASTE HERE]</pre>
+  <button onclick="copyPrompt('prompt93','status93')">Copy Prompt</button>
+  <span id="status93" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Outlook" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Outlook: Scheduling Poll Text + Options</h3>
+    <div class="badges"><span class="badge">Outlook</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt94">Create scheduling poll language for a meeting.
+1) Provide 6 time options across 3 days (use placeholders).
+2) Draft the email text inviting participants to vote.
+3) Include a line about accessibility accommodations.
+
+MEETING PURPOSE + ATTENDEES:
+[PASTE HERE]</pre>
+  <button onclick="copyPrompt('prompt94','status94')">Copy Prompt</button>
+  <span id="status94" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Outlook" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Outlook: Committee Monthly Update Template</h3>
+    <div class="badges"><span class="badge">Outlook</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt95">Create a reusable monthly update email template for a committee.
+1) Sections: Wins, Metrics, Risks, Decisions needed, Next month plan.
+2) Provide example text in brackets.
+3) Add a 5-bullet ‘How to use this template’ guide.</pre>
+  <button onclick="copyPrompt('prompt95','status95')">Copy Prompt</button>
+  <span id="status95" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Outlook" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Outlook: Vendor Negotiation Email (terms + tone)</h3>
+    <div class="badges"><span class="badge">Outlook</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt96">Draft a vendor negotiation email based on these points.
+1) Open professionally and confirm goals.
+2) Propose 5 specific term changes (pricing, SLA, renewal, data security, support).
+3) Ask 6 clarifying questions.
+4) Close with a clear deadline and next meeting suggestion.
+
+POINTS:
+[PASTE HERE]</pre>
+  <button onclick="copyPrompt('prompt96','status96')">Copy Prompt</button>
+  <span id="status96" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Outlook" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Outlook: Appointment Prep Brief (for 1:1)</h3>
+    <div class="badges"><span class="badge">Outlook</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt97">From the previous emails/notes I paste below, create a 1:1 prep brief:
+1) Goals for the meeting
+2) Decisions needed
+3) Discussion topics with questions
+4) Follow-up tasks
+Output as a one-page agenda I can paste into an invite.
+
+CONTEXT:
+[PASTE HERE]</pre>
+  <button onclick="copyPrompt('prompt97','status97')">Copy Prompt</button>
+  <span id="status97" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Copilot Chat" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Cross-App Workflow Orchestrator (Chat → Excel → PowerPoint → Outlook)</h3>
+    <div class="badges"><span class="badge">Copilot Chat</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt98">Help me run a full workflow using Copilot Basic tools.
+Steps:
+1) Ask me for the minimum inputs you need (goal, audience, data source, deadline).
+2) Produce a plan with 4 phases: Analyze (Chat), Quantify (Excel), Present (PowerPoint), Communicate (Outlook).
+3) For each phase, write the exact prompt I should paste into that app to complete the phase.
+4) Include checkpoints: what to verify for accuracy, privacy, and accessibility.
+5) End with a one-page timeline I can copy into a project tracker.</pre>
+  <button onclick="copyPrompt('prompt98','status98')">Copy Prompt</button>
+  <span id="status98" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="PowerPoint" data-complexity="Complex">
+  <div class="card-header">
+    <h3>PowerPoint: Slide Doctor + Rehearsal Timing</h3>
+    <div class="badges"><span class="badge">PowerPoint</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt99">Review this deck as if I’m presenting to university leadership.
+1) Identify slides that are overloaded or off-story and propose fixes.
+2) Rewrite each slide title as a takeaway headline.
+3) Provide recommended time per slide to fit a total of [TOTAL MINUTES] minutes.
+4) Create a ‘Backup slides’ list (what belongs in appendix) and where to reference it.
+5) Draft a 60-second opening and 30-second close.</pre>
+  <button onclick="copyPrompt('prompt99','status99')">Copy Prompt</button>
+  <span id="status99" class="copied"></span>
+</div>
+<div class="prompt-card" data-category="Outlook" data-complexity="Complex">
+  <div class="card-header">
+    <h3>Outlook: Build a Reply + Meeting + Task Bundle</h3>
+    <div class="badges"><span class="badge">Outlook</span><span class="badge badge-complex">Complex</span></div>
+  </div>
+  <pre id="prompt100">From the email below, create a complete bundle:
+1) Draft my reply (clear decision ask + deadline).
+2) Draft a meeting invitation description with agenda and desired outputs.
+3) Extract tasks and create a checklist I can paste into To Do/Planner (Owner, Due, Notes).
+4) Provide two alternate tones: friendly-collaborative and firm-direct.
+
+EMAIL:
+[PASTE HERE]</pre>
+  <button onclick="copyPrompt('prompt100','status100')">Copy Prompt</button>
+  <span id="status100" class="copied"></span>
+</div>
+  <footer>
+    Tip: Replace bracketed placeholders like <strong>[PASTE HERE]</strong>, <strong>[METRIC]</strong>, and <strong>[N]</strong>. For best results, paste relevant context (policy text, email thread, tables) and ask Copilot to use only what you provided.
+  </footer>
+
+  <script>
+    function copyPrompt(promptId, statusId) {
+      const text = document.getElementById(promptId).innerText;
+      navigator.clipboard.writeText(text);
+      const el = document.getElementById(statusId);
+      el.innerText = "Copied!";
+      setTimeout(() => { el.innerText = ""; }, 1500);
+    }
+
+    function filterPrompts() {
+      const q = (document.getElementById('searchBox').value || '').toLowerCase();
+      const cat = document.getElementById('categorySelect').value;
+      const comp = document.getElementById('complexitySelect').value;
+
+      const cards = Array.from(document.querySelectorAll('.prompt-card'));
+      let shown = 0;
+      cards.forEach(card => {
+        const c = card.getAttribute('data-category');
+        const k = card.getAttribute('data-complexity');
+        const text = card.innerText.toLowerCase();
+
+        const matchQ = !q || text.includes(q);
+        const matchC = (cat === 'All' || c === cat);
+        const matchK = (comp === 'All' || k === comp);
+
+        const show = matchQ && matchC && matchK;
+        card.style.display = show ? '' : 'none';
+        if (show) shown += 1;
+      });
+      document.getElementById('countLabel').innerText = shown + " shown / " + cards.length + " total";
+    }
+
+    // Initialize count
+    filterPrompts();
+  </script>
+</body>
+</html>
