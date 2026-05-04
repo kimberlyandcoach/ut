@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Copilot Prompt Library — Multi‑Step Prompts for University Staff</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --card: #f9f9f9;
+      --border: #d0d0d0;
+      --text: #1a1a1a;
+      --muted: #555;
+      --accent: #2563eb;
+      --success: #0a7a26;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 980px;
+      margin: 36px auto;
+      padding: 0 18px;
+      line-height: 1.55;
+      background: var(--bg);
+      color: var(--text);
+    }
+    h1 { margin-bottom: 6px; }
+    .subtitle { color: var(--muted); margin-top: 0; }
+    .section {
+      margin-top: 26px;
+      padding-top: 10px;
+      border-top: 2px solid #eee;
+    }
+    .prompt-card {
+      border: 1px solid var(--border);
+      padding: 16px;
+      margin: 14px 0 18px;
+      border-radius: 8px;
+      background: var(--card);
+    }
+    pre {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      background: #fff;
+      border: 1px solid #e6e6e6;
+      border-radius: 6px;
+      padding: 12px;
+      margin: 10px 0 0;
+      font-size: 14px;
+    }
+    button {
+      margin-top: 10px;
+      padding: 9px 14px;
+      font-size: 14px;
+      cursor: pointer;
+      border: 1px solid var(--accent);
+      background: var(--accent);
+      color: #fff;
+      border-radius: 6px;
+    }
+    button:hover { filter: brightness(0.95); }
+    .copied {
+      color: var(--success);
+      font-size: 13px;
+      margin-left: 10px;
+      font-weight: bold;
+    }
+    .tip {
+      background: #eef2ff;
+      border: 1px solid #dbeafe;
+      padding: 12px 14px;
+      border-radius: 8px;
+      margin: 14px 0 18px;
+    }
+    .small { font-size: 13px; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <h1>Coach Culbertson’s Copilot Copy‑and‑Paste Prompt Library</h1>
+  <p class="subtitle">Intro to AI Prompt Engineering: <strong>Multi‑Step Prompts for University Staff</strong> (3‑hour workshop)</p>
+  <div class="tip">
+    <strong>How to use:</strong> Click <em>Copy Prompt</em>, paste into Copilot, then replace anything in <strong>[BRACKETS]</strong>.
+    <div class="small">Tip: For multi‑step prompts, paste the whole prompt at once so Copilot can follow the sequence.</div>
+  </div>
+
+  <h2 class="section">Getting Started</h2>
+
+  <div class="prompt-card">
+    <h3>Workshop Copilot Setup (University Staff)</h3>
+    <pre id="staff_setup">You are my AI assistant supporting my role as a university staff member in higher education.
+
+Operating principles:
+- Prioritize clarity, accuracy, professionalism, accessibility, and student/employee privacy (FERPA + institutional policies).
+- Use data minimization: never request or retain unnecessary personal data; prefer anonymized placeholders.
+- When uncertain, ask 1–2 targeted questions; otherwise proceed with best‑practice defaults and state assumptions.
+- Separate facts from recommendations. Flag risks (privacy, bias, hallucinations) and suggest safer alternatives.
+- Avoid legal/HR/compliance determinations—provide guidance and point to the appropriate campus office/policy.
+
+Output preferences:
+- Start with a short summary, then details.
+- Provide reusable deliverables (emails, agendas, SOPs, checklists, FAQs, templates, reports, Forms questions, Teams posts).
+- Use headings, numbered steps, and tables when helpful.</pre>
+    <button onclick="copyPrompt('staff_setup', 'status1')">Copy Prompt</button>
+    <span id="status1" class="copied"></span>
+  </div>
+
+  <h2 class="section">Part 1 — Prompt Engineering Basics</h2>
+
+  <div class="prompt-card">
+    <h3>Single‑Step Prompt Builder (Role–Task–Output–Constraints)</h3>
+    <pre id="staff_single_formula">Help me write an effective single‑step prompt using this formula: Role, Task, Output, Constraints.
+
+Context: [department + audience + goal]
+My rough request: [paste]
+
+Return:
+1) A polished single‑step prompt I can copy/paste
+2) 3 optional constraint add‑ons (tone, length, format, sensitivity/privacy, accessibility)
+3) 1 sentence explaining why it will work better</pre>
+    <button onclick="copyPrompt('staff_single_formula', 'status2')">Copy Prompt</button>
+    <span id="status2" class="copied"></span>
+  </div>
+
+  <div class="prompt-card">
+    <h3>What AI Can / Can’t Do (Higher Ed staff quick primer)</h3>
+    <pre id="staff_ai_can_cant">Act as a coach for AI beginners on a university staff team.
+Create a quick primer: what generative AI can do well, what it does poorly, and how to use it responsibly in staff workflows.
+
+Output requirements:
+- A two‑column table: ‘Works well’ vs ‘Use caution / doesn’t do’
+- 6 concrete staff examples (email drafting, policy/SOP drafts, meeting agendas/minutes, data summaries, student communications, project planning)
+- A short ‘Do/Don’t’ list focused on privacy, bias, hallucinations, and institutional voice
+- Keep it to ~400–600 words</pre>
+    <button onclick="copyPrompt('staff_ai_can_cant', 'status3')">Copy Prompt</button>
+    <span id="status3" class="copied"></span>
+  </div>
+
+  <div class="prompt-card">
+    <h3>Web Research with Copilot (Find + Verify + Summarize)</h3>
+    <pre id="staff_web_research">Use web research to help me understand: [TOPIC].
+
+Step 1 — Search plan
+- Propose 6–10 search queries (general → specific; include site:.edu/.gov where relevant).
+
+Step 2 — Source list
+- Provide 6–10 reputable sources. For each: title, org/author, date, link, and 2–3 sentence takeaway.
+
+Step 3 — Actionable synthesis
+- Summarize key points and implications for university operations (5–8 bullets).
+- Provide 3 recommended next actions I could take (e.g., questions to ask stakeholders, draft communication, checklist).
+
+Constraints:
+- Include links for every source.
+- Label uncertain claims as uncertain.</pre>
+    <button onclick="copyPrompt('staff_web_research', 'status4')">Copy Prompt</button>
+    <span id="status4" class="copied"></span>
+  </div>
+
+  <h2 class="section">Part 2 — Multi‑Step Prompts</h2>
+
+  <div class="prompt-card">
+    <h3>Multi‑Step Prompt Template (Clarify → Draft → Quality‑check → Final)</h3>
+    <pre id="staff_multistep_template">Create a reusable multi‑step prompt for this task: [TASK].
+Audience: [students/faculty/staff/external]
+Channel: [email/Teams post/webpage/report]
+
+Step 1 — Clarify
+Ask up to 5 questions about goals, audience, tone, required info, and constraints (privacy, approvals, deadlines). If I don’t answer, infer reasonable defaults and state them.
+
+Step 2 — Draft
+Create the first draft output in the requested channel format.
+
+Step 3 — Quality‑check
+Review the draft against: accuracy, clarity, inclusivity/accessibility, institutional voice, privacy/data minimization, and actionability.
+
+Step 4 — Final
+Revise and output the final version, plus a short ‘what changed’ note.</pre>
+    <button onclick="copyPrompt('staff_multistep_template', 'status5')">Copy Prompt</button>
+    <span id="status5" class="copied"></span>
+  </div>
+
+  <div class="prompt-card">
+    <h3>Instructor‑Led Example: Multi‑Step Email + FAQ Builder</h3>
+    <pre id="staff_email_faq_builder">You are a university communications specialist. Help me build a clear, accurate message and supporting FAQ using a multi‑step process.
+
+Topic: [announcement/change/process]
+Audience: [students/faculty/staff/external]
+
+Step 1 — Clarify
+Ask 4–6 questions about purpose, key dates, required details, who approves, and what not to include (privacy/sensitive items).
+
+Step 2 — Draft
+Produce:
+- Email (subject + body)
+- 6–10 FAQ items (Q/A)
+- A 2–3 sentence Teams post version
+
+Step 3 — Improve
+Check for clarity, tone, reading level (plain language), and accessibility. Flag any privacy/sensitivity risks. Revise and provide final versions.</pre>
+    <button onclick="copyPrompt('staff_email_faq_builder', 'status6')">Copy Prompt</button>
+    <span id="status6" class="copied"></span>
+  </div>
+
+  <div class="prompt-card">
+    <h3>Instructor‑Led Example: SOP / Process Documentation Builder</h3>
+    <pre id="staff_sop_builder">You are a process analyst for a university office. Document a workflow as an SOP using a multi‑step process.
+
+Process to document: [PROCESS]
+Audience: [new staff / cross‑training / student workers]
+
+Step 1 — Clarify
+Ask up to 6 questions: trigger, inputs, owners, tools (M365), exceptions, approvals, and timeline.
+
+Step 2 — Draft SOP
+Create:
+- Purpose + scope
+- Roles/responsibilities
+- Step‑by‑step procedure
+- Decision points/exceptions
+- Checklist
+- ‘Common errors’ + troubleshooting
+
+Step 3 — Validate
+Identify gaps/ambiguities and propose improvements (controls, documentation, accessibility). Revise into the final SOP.</pre>
+    <button onclick="copyPrompt('staff_sop_builder', 'status7')">Copy Prompt</button>
+    <span id="status7" class="copied"></span>
+  </div>
+
+  <div class="prompt-card">
+    <h3>Guided Practice: Build Your Own 3‑Step Prompt (Staff)</h3>
+    <pre id="staff_guided_practice">Coach me to build a 3‑step prompt for this real staff task: [TASK].
+
+Step 1 — Define success
+Ask me for audience, channel, length, tone, deadline, and any must‑include/must‑avoid items (privacy/approvals).
+
+Step 2 — Draft the prompt
+Write the full multi‑step prompt in copy/paste form with placeholders like [DEPARTMENT], [POLICY], [DATE], [LINK].
+
+Step 3 — Make it stronger
+Suggest 5 upgrades (constraints, examples, evaluation criteria, privacy notes). Then output the improved final prompt.</pre>
+    <button onclick="copyPrompt('staff_guided_practice', 'status8')">Copy Prompt</button>
+    <span id="status8" class="copied"></span>
+  </div>
+
+  <h2 class="section">Part 3 — Staff Use Cases & Practice</h2>
+
+  <div class="prompt-card">
+    <h3>Common Pattern: Draft → Review → Revise (Staff communications)</h3>
+    <pre id="staff_draft_review_revise">Use a draft–review–revise workflow.
+
+Draft: Create a first draft of [THING] for [AUDIENCE] about [TOPIC].
+Review: Evaluate it for clarity, correctness, tone, institutional voice, accessibility, and privacy/data minimization.
+Revise: Produce an improved version and list 5 key edits you made (with reasons).
+
+Constraints:
+- If facts are missing, ask questions or label uncertainty.
+- Keep final to [LENGTH] and include a clear call‑to‑action.</pre>
+    <button onclick="copyPrompt('staff_draft_review_revise', 'status9')">Copy Prompt</button>
+    <span id="status9" class="copied"></span>
+  </div>
+
+  <div class="prompt-card">
+    <h3>Meeting Pack Builder (Agenda → Facilitation → Minutes)</h3>
+    <pre id="staff_meeting_pack">Help me run an effective meeting.
+
+Inputs:
+- Meeting purpose: [purpose]
+- Attendees/roles: [list]
+- Timebox: [minutes]
+- Pre‑reads/links: [links]
+
+Step 1 — Agenda
+Create a timed agenda with outcomes for each section and a parking lot section.
+
+Step 2 — Facilitation
+Provide facilitation notes (questions to ask, decision method, how to handle off‑topic).
+
+Step 3 — Minutes template
+Create a minutes template plus a post‑meeting follow‑up email/Teams message with action items (owner + due date).</pre>
+    <button onclick="copyPrompt('staff_meeting_pack', 'status10')">Copy Prompt</button>
+    <span id="status10" class="copied"></span>
+  </div>
+
+  <div class="prompt-card">
+    <h3>Excel / Data Summary Helper (No sensitive data)</h3>
+    <pre id="staff_data_summary">Act as a data analyst for a university office. I will paste a small, de‑identified table or summary stats.
+
+Task: [what you want to learn]
+Data (de‑identified): [paste]
+
+Step 1 — Clarify
+Ask 2–4 questions about definitions, time period, and audience.
+
+Step 2 — Analyze
+Compute/describe trends, outliers, and key comparisons. Suggest 3 charts to create in Excel (chart type + fields).
+
+Step 3 — Communicate
+Write a 1‑page executive summary and a short slide outline.
+
+Constraints:
+- Do not infer personal identities.
+- If data quality issues exist, call them out.</pre>
+    <button onclick="copyPrompt('staff_data_summary', 'status11')">Copy Prompt</button>
+    <span id="status11" class="copied"></span>
+  </div>
+
+  <div class="prompt-card">
+    <h3>Policy / Procedure Drafting (Template + review)</h3>
+    <pre id="staff_policy_drafting">Act as a policy writer for a university office. Draft a policy/procedure document for: [TOPIC].
+
+Step 1 — Clarify
+Ask 4–6 questions: purpose, scope, stakeholders, authority, exceptions, and enforcement/ownership.
+
+Step 2 — Draft
+Create a concise document with: purpose, scope, definitions, policy statements, procedures, roles, compliance/records, FAQs, and references to ‘insert campus policy links’.
+
+Step 3 — Review
+Check for plain language, accessibility, ambiguity, and unintended burden. Suggest a stakeholder review plan and revise the document.</pre>
+    <button onclick="copyPrompt('staff_policy_drafting', 'status12')">Copy Prompt</button>
+    <span id="status12" class="copied"></span>
+  </div>
+
+  <div class="prompt-card">
+    <h3>Customer‑Service Responses (Student‑facing, empathetic, consistent)</h3>
+    <pre id="staff_customer_service">You are a student‑services specialist. Help me respond to a student inquiry in a supportive, policy‑aligned way.
+
+Student message (remove identifiers): [paste]
+Relevant policy/constraints: [paste or ‘unknown’]
+
+Step 1 — Clarify
+If needed, ask up to 3 questions (missing info, deadlines, who owns the decision).
+
+Step 2 — Draft response
+Write 2 versions:
+- Version A: brief (email)
+- Version B: warmer + more detailed (email or Teams)
+Include clear next steps and who to contact.
+
+Step 3 — Safety check
+Ensure tone is respectful, avoids promises beyond authority, and protects privacy. Revise to final.</pre>
+    <button onclick="copyPrompt('staff_customer_service', 'status13')">Copy Prompt</button>
+    <span id="status13" class="copied"></span>
+  </div>
+
+  <div class="prompt-card">
+    <h3>Knowledge Base / Website Update (Plain language + accessibility)</h3>
+    <pre id="staff_kb_article">Create a knowledge‑base article or webpage draft about: [TOPIC].
+
+Step 1 — Audience
+Ask who this is for and what problem they’re trying to solve.
+
+Step 2 — Draft
+Write:
+- Short summary
+- Step‑by‑step instructions
+- Troubleshooting
+- FAQ
+- Contact/hand‑off section
+
+Step 3 — Improve
+Edit for plain language (8th–10th grade), accessibility (headings, bullets, descriptive links), and inclusivity. Provide final copy plus a meta description.</pre>
+    <button onclick="copyPrompt('staff_kb_article', 'status14')">Copy Prompt</button>
+    <span id="status14" class="copied"></span>
+  </div>
+
+  <div class="prompt-card">
+    <h3>Project Plan Builder (Timeline + risks + communications)</h3>
+    <pre id="staff_project_plan">Act as a project manager for a university operations project. Build a lightweight project plan for: [PROJECT].
+
+Step 1 — Clarify
+Ask 4–6 questions about scope, stakeholders, deadline, dependencies, and constraints.
+
+Step 2 — Plan
+Produce:
+- Goals + success metrics
+- Work breakdown (phases + tasks)
+- Timeline (weeks)
+- RACI (Responsible/Accountable/Consulted/Informed)
+- Risk register (top 8 risks + mitigations)
+
+Step 3 — Communications
+Create a weekly status update template and a brief exec update message.</pre>
+    <button onclick="copyPrompt('staff_project_plan', 'status15')">Copy Prompt</button>
+    <span id="status15" class="copied"></span>
+  </div>
+
+  <h2 class="section">Wrap‑Up & Prompting Tips</h2>
+
+  <div class="prompt-card">
+    <h3>Prompt Debugger (Fix unclear prompts)</h3>
+    <pre id="staff_prompt_debugger">Help me debug a prompt that isn’t working.
+
+My prompt: [paste]
+What I expected: [describe]
+What happened instead: [describe]
+
+Step 1 — Diagnose
+Identify what’s missing (role, task, context, output format, constraints, examples, evaluation criteria).
+
+Step 2 — Rewrite
+Provide 2 improved versions:
+- Version A: simple single‑step
+- Version B: multi‑step (clarify → draft → quality‑check → final)
+
+Step 3 — Coaching
+Give 5 practical tips tailored to my task type.</pre>
+    <button onclick="copyPrompt('staff_prompt_debugger', 'status16')">Copy Prompt</button>
+    <span id="status16" class="copied"></span>
+  </div>
+
+  <div class="prompt-card">
+    <h3>Privacy & Safety Check (Before you paste sensitive info)</h3>
+    <pre id="staff_privacy_check">Before I use AI for this task, assess privacy, ethics, and data‑minimization risks.
+
+Task: [describe]
+Data I plan to include: [describe/paste]
+
+Return:
+- Risk level (low/medium/high) with reasons
+- What to remove or anonymize
+- A safer alternative workflow (placeholders, aggregation, or internal-only tools)
+- A copy/paste ‘safe version’ of my prompt with sensitive details removed</pre>
+    <button onclick="copyPrompt('staff_privacy_check', 'status17')">Copy Prompt</button>
+    <span id="status17" class="copied"></span>
+  </div>
+
+  <script>
+    function copyPrompt(promptId, statusId) {
+      const text = document.getElementById(promptId).innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const el = document.getElementById(statusId);
+        el.innerText = "Copied!";
+        setTimeout(() => { el.innerText = ""; }, 1800);
+      });
+    }
+  </script>
+
+</body>
+</html>
